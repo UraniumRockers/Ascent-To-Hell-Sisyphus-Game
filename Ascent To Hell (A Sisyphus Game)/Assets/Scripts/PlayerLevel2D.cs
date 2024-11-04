@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player2D : MonoBehaviour
+public class PlayerLevel2D : MonoBehaviour
 {
     [SerializeField] float speed;
 
