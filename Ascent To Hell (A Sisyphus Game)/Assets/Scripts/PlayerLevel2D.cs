@@ -6,7 +6,7 @@ public class PlayerLevel2D : MonoBehaviour
 {
     [SerializeField] float speed;
 
-    // Update is called once per frame
+    #region Movement
     void Update()
     {
         if (Tablet.shouldPlayerMove)
@@ -59,4 +59,5 @@ public class PlayerLevel2D : MonoBehaviour
             }
         }
     }
+    #endregion
 }

@@ -15,7 +15,9 @@ public class CameraLevel2D : MonoBehaviour
     {
         playerLevel2D = GameObject.Find("Player Level 2D").transform;
     }
-    // Camera Movement (large if statement )
+
+    #region Camera
+    // Camera Movement (large if statement)
     void Update()
     {
         yPosPlayer = playerLevel2D.position.y;
@@ -67,4 +69,5 @@ public class CameraLevel2D : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(-17.788f * 2, 0, -10), speed * Time.deltaTime);
         }
     }
+    #endregion
 }
