@@ -15,17 +15,17 @@ public class Tablet : MonoBehaviour
     TMP_Text tabletText;                                 // Tablet tip text
     bool keyDown = false;                                // Has 'E' been pressed
 
-    #region Define Variables
-
     private void Awake()
     {
+        #region Defining Variables
         // Defining the variables
-        tabletCanvas = GameObject.Find("Level 1 Tablet Canvas");
+        tabletCanvas = GameObject.Find("Tablet Canvas");
         tabletText = tabletCanvas.GetComponentsInChildren<TMP_Text>()[0];
         tabletCanvas.SetActive(false);
         originBottomBoxCollider = GameObject.Find("Origin").GetComponent<BoxCollider2D>();
         redCloudBottom = GameObject.Find("Red Cloud (Bottom)");
-
+        #endregion
+        #region Setting Text
         // Deciding what the tablet to say based on the scene
         /// THIS MIGHT NOT WORK YET BECAUSE I DIDN'T TEST IT YET
         switch (SceneManager.GetActiveScene().buildIndex)
@@ -41,12 +41,11 @@ public class Tablet : MonoBehaviour
                 break;
             default:
                 break;
-        } 
-        
+        }
+        #endregion
         // Disabling red cloud
         redCloudBottom.SetActive(false);
     }
-    #endregion
 
     #region Check For Button Press
     private void Update()
