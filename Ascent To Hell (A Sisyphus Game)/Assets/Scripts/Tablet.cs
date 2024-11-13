@@ -9,9 +9,8 @@ public class Tablet : MonoBehaviour
 {
     public static bool shouldPlayerMove = true;          // Stops player movement if the tip screen is out
 
-    BoxCollider2D originBottomBoxCollider;               // Box collider that blocks the bottom entrance
     GameObject tabletCanvas;                             // Canvas that shows tablet when interacted
-    GameObject redCloudBottom;
+    GameObject redCloudBottom;                           // Bottom cloud (sprite & collider)
     TMP_Text tabletText;                                 // Tablet tip text
     bool keyDown = false;                                // Has 'E' been pressed
 
@@ -22,7 +21,6 @@ public class Tablet : MonoBehaviour
         tabletCanvas = GameObject.Find("Tablet Canvas");
         tabletText = tabletCanvas.GetComponentsInChildren<TMP_Text>()[0];
         tabletCanvas.SetActive(false);
-        originBottomBoxCollider = GameObject.Find("Origin").GetComponent<BoxCollider2D>();
         redCloudBottom = GameObject.Find("Red Cloud (Bottom)");
         #endregion
         #region Setting Text
@@ -43,8 +41,11 @@ public class Tablet : MonoBehaviour
                 break;
         }
         #endregion
-        // Disabling red cloud
-        redCloudBottom.SetActive(false);
+        #region Disabling Cloud Sprites
+        redCloudBottom.GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.Find("Red Cloud (Left)").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.Find("Red Cloud (Right)").GetComponent<SpriteRenderer>().enabled = false;
+        #endregion
     }
 
     #region Check For Button Press
@@ -74,8 +75,8 @@ public class Tablet : MonoBehaviour
             // Enables/disables canvas and removes disables box collider, allowing the player to go down
             tabletCanvas.SetActive(!tabletCanvas.activeSelf);
             keyDown = false;
-            originBottomBoxCollider.enabled = false;
-            redCloudBottom.SetActive(true);
+            redCloudBottom.GetComponent<BoxCollider2D>().enabled = false;
+            redCloudBottom.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
     #endregion
