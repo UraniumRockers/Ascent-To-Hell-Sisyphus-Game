@@ -14,7 +14,7 @@ public class Tablet : MonoBehaviour
     TMP_Text tabletText;                                 // Tablet tip text
     bool keyDown = false;                                // Has 'E' been pressed
 
-    private void Awake()
+    private void Start()
     {
         #region Defining Variables
         // Defining the variables
@@ -75,7 +75,8 @@ public class Tablet : MonoBehaviour
             // Enables/disables canvas and removes disables box collider, allowing the player to go down
             tabletCanvas.SetActive(!tabletCanvas.activeSelf);
             keyDown = false;
-            redCloudBottom.GetComponent<BoxCollider2D>().enabled = false;
+            redCloudBottom.GetComponents<BoxCollider2D>()[0].enabled = false;
+            redCloudBottom.GetComponents<BoxCollider2D>()[1].enabled = true;
             redCloudBottom.GetComponent<SpriteRenderer>().enabled = true;
         }
     }

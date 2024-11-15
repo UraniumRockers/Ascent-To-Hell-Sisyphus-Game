@@ -11,7 +11,7 @@ public class CameraLevel2D : MonoBehaviour
     float yPosPlayer;
     float xPosPlayer;
 
-    private void Awake()
+    private void Start()
     {
         playerLevel2D = GameObject.Find("Player Level 2D").transform;
     }

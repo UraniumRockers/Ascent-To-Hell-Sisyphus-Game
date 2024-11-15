@@ -9,7 +9,7 @@ public class HealthManager2DAndBossfight : MonoBehaviour
     private int sceneIndex;
 
     #region Setting Vars & Initial Set Health
-    private void Awake()
+    private void Start()
     {
         health2DAndBossfight[0] = GameObject.Find("-.5");
         health2DAndBossfight[1] = GameObject.Find("-1.5");
@@ -73,7 +73,7 @@ public class HealthManager2DAndBossfight : MonoBehaviour
         }
     }
     #endregion
-
+    
     // FOR TESTING ONLY
     #region Key Inputs to Test
     /*
