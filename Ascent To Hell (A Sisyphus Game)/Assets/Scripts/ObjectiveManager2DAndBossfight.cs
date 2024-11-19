@@ -7,7 +7,7 @@ using TMPro;
 
 public class ObjectiveManager2DAndBossfight : MonoBehaviour
 {
-    private TMP_Text objectiveText;
+    private static TMP_Text objectiveText;
     private int sceneIndex;
 
     // Start is called before the first frame update
@@ -56,9 +56,9 @@ public class ObjectiveManager2DAndBossfight : MonoBehaviour
     }
 
     #region Function to Set Objective
-    public void Change2DObjectiveText(string text)
+    public static void Change2DObjectiveText(string text)
     {
-        objectiveText.text = $"Objective: {text}";
+        ObjectiveManager2DAndBossfight.objectiveText.text = $"Objective: {text}";
     }
     #endregion
 }

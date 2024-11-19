@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class BottomCloudScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (collision.CompareTag("Player"))
+        {
+            ObjectiveManager2DAndBossfight.Change2DObjectiveText("Continue down the tunnel.");
+            gameObject.GetComponents<BoxCollider2D>()[0].enabled = false;
+        }
     }
 }
