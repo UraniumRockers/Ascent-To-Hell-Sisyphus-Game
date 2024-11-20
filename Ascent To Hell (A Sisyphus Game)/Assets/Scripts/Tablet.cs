@@ -55,7 +55,7 @@ public class Tablet : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             keyDown = true;
-            print("Key was pressed");
+            //print("Key was pressed");
         }
         else if (Input.GetKeyUp(KeyCode.E))
         {
