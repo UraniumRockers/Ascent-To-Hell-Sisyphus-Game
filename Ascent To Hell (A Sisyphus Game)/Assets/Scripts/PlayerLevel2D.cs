@@ -6,41 +6,41 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLevel2D : MonoBehaviour
 {
-    [SerializeField] float speed;
-    private int sceneIndex;
+    [SerializeField] float speed;                                         // Movement speed
+    private int sceneIndex;                                               // Scene Index
+    private List<string> thoughtBarText = new List<string>();             // List of stuff to say in timed text
 
     private void Start()
     {
         sceneIndex = SceneManager.GetActiveScene().buildIndex; // Get scene index
 
         // MAKE THESE ARGUMENTS ARRAYS BY MAKING A VARIABLE IN THE BEGINNGING AND SETTING IT TO THAT
-        #region Initial Timed Text
+        #region Initial Timed Text (2D)
         switch (sceneIndex)
         {
             case 1:
-                ThoughtCanvasManager2D.SetThoughtBarText({ "Where... am I? What is this place?", "There's literally nothing here. Execpt for that tablet..." }, true);
-                ThoughtCanvasManager2D.SetThoughtBarText("There's literally nothing here. Execpt for that tablet...", false);
+                thoughtBarText.Add("Where... am I? What is this place?");
+                thoughtBarText.Add("There's literally nothing here. Except for that tablet...");
+                ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
                 break;
             case 4:
-                ThoughtCanvasManager2D.SetThoughtBarText("Here again? And what the hell was that? Is this a dream or something?", true);
-                ThoughtCanvasManager2D.SetThoughtBarText("If it is, this is messed up. I just say myself get frickin killed...", false);
-                ThoughtCanvasManager2D.SetThoughtBarText("Do I have to do all of that stuff again?", false);
+                thoughtBarText.Add("Here again? And what the hell was that? Is this a dream or something?");
+                thoughtBarText.Add("If it is, this is messed up. I just saw myself get frickin killed...");
+                thoughtBarText.Add("Do I have to do all of that stuff again?");
+                ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
                 break;
             case 7:
-                ThoughtCanvasManager2D.SetThoughtBarText("...I remember that bat... why was I holding it? What would I have done with it in an alleyway...", true);
-                ThoughtCanvasManager2D.SetThoughtBarText("And am I in a loop or some crap? I really don't wanna do all that again...", false);
+                thoughtBarText.Add("...I remember that bat... why was I holding it? What would I have done with it in an alleyway...");
+                thoughtBarText.Add("And am I in a loop or some crap? I really don't wanna do all that again...");
+                ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
                 break;
             case 9:
-                ThoughtCanvasManager2D.SetThoughtBarText("Okay. What the hell. Was that... me? Did I fight myself?", true);
-                ThoughtCanvasManager2D.SetThoughtBarText("I hope I wake up from whatever this is soon...", false);
+                thoughtBarText.Add("Okay. What the hell. Was that... me? Did I fight myself?");
+                thoughtBarText.Add("And what was... I?... talking about? What crime? Is that related to the bat?");
+                thoughtBarText.Add("I hope I wake up from whatever this is soon...");
+                ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
                 break;
-            case 11:
-                ThoughtCanvasManager2D.SetThoughtBarText("Did I do that...?", true);
-                ThoughtCanvasManager2D.SetThoughtBarText("Did I... kill someone?", false);
-                ThoughtCanvasManager2D.SetThoughtBarText("...", false);
-                ThoughtCanvasManager2D.SetThoughtBarText("What... Why...", false);
-                break;
-        
+        }
         #endregion
     }
 
@@ -48,7 +48,7 @@ public class PlayerLevel2D : MonoBehaviour
     void Update()
     {
         #region Movement
-        if (Tablet.shouldPlayerMove || ThoughtCanvasManager2D.shouldPlayerMove)
+        if (Tablet.shouldPlayerMove && ThoughtCanvasManager2D.shouldPlayerMove)
         {
             if (Input.GetKey(KeyCode.W))
             {

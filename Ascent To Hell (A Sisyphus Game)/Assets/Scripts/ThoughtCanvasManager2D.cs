@@ -6,11 +6,11 @@ using Unity.VisualScripting;
 
 public class ThoughtCanvasManager2D : MonoBehaviour
 {
-    public static bool shouldPlayerMove = true;
+    public static bool shouldPlayerMove = true;           // Disables player movement
 
-    private static GameObject thoughtBar;
-    private static TMP_Text thoughtText;
-    private static bool isEPressed = false;
+    private static GameObject thoughtBar;                 // The parent for all of the UI stuff
+    private static TMP_Text thoughtText;                  // The text
+    private static bool isEPressed = false;               // Detects if 'E' is pressed
     void Start()
     {
         // Defining variables and deactivating variables
@@ -50,15 +50,15 @@ public class ThoughtCanvasManager2D : MonoBehaviour
     #region Timed Text Code
 
     // Coroutine that creates timed text
-    private IEnumerator GenerateTimedText(string[] text, float time, bool wait)
+    private IEnumerator GenerateTimedText(List<string> text, float time)
     {
         shouldPlayerMove = false; // Player can no longer move
 
-        if (wait) { yield return new WaitForSeconds(0.15f); } // Pause for a little bit for "dramatic effect"
+        yield return new WaitForSeconds(0.15f); // Small initial wait
 
-        thoughtText.text = "You: ";
         foreach (string str in text)
         {
+            thoughtText.text = "You: ";
             foreach (char character in str)
             {
                 thoughtText.text += character;
@@ -81,13 +81,13 @@ public class ThoughtCanvasManager2D : MonoBehaviour
     }
 
     // Activate Thought Bar & Call Coroutine
-    public static void SetThoughtBarText(string text, bool wait)
+    public static void SetThoughtBarText(List<string> text)
     {
         ThoughtCanvasManager2D.thoughtBar.SetActive(true);
         ThoughtCanvasManager2D thoughtCanvas = GameObject.FindObjectOfType<ThoughtCanvasManager2D>();
         if (thoughtCanvas != null)
         {
-            thoughtCanvas.StartCoroutine(thoughtCanvas.GenerateTimedText(text, 0.05f, wait));
+            thoughtCanvas.StartCoroutine(thoughtCanvas.GenerateTimedText(text, 0.05f));
         }
     }
 
