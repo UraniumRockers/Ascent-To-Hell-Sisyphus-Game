@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class Tablet : MonoBehaviour
 {
-    public static bool shouldPlayerMove = true;                  // Stops player movement if the tip screen is out
+    public static bool canPlayerMove = true;                    // Can player move
 
     private GameObject tabletCanvas;                             // Canvas that shows tablet when interacted
     private GameObject redCloudBottom;                           // Bottom cloud (sprite & collider)
@@ -27,6 +27,7 @@ public class Tablet : MonoBehaviour
         redCloudBottom = GameObject.Find("Red Cloud (Bottom)");
         hasPlayerThought = false;
         #endregion
+
         #region Setting Tablet Text
         // Deciding what the tablet to say based on the scene
         switch (SceneManager.GetActiveScene().buildIndex)
@@ -44,6 +45,7 @@ public class Tablet : MonoBehaviour
                 break;
         }
         #endregion
+
         #region Disabling Cloud Sprites
         redCloudBottom.GetComponent<SpriteRenderer>().enabled = false;
         GameObject.Find("Red Cloud (Left)").GetComponent<SpriteRenderer>().enabled = false;
@@ -66,7 +68,7 @@ public class Tablet : MonoBehaviour
         }
 
         // Checks every frame to see if the tablet canvas is visible to stop player movement
-        shouldPlayerMove = !tabletCanvas.activeSelf;
+        canPlayerMove = !tabletCanvas.activeSelf;
     }
     #endregion
 

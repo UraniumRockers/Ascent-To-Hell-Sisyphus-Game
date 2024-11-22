@@ -6,14 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLevel2D : MonoBehaviour
 {
-    [SerializeField] float speed;                                         // Movement speed
+    public static bool canPlayerMove;                                     // Can player move
+
+    [SerializeField] private float speed;                                 // Movement speed
     private int sceneIndex;                                               // Scene Index
     private List<string> thoughtBarText = new List<string>();             // List of stuff to say in timed text
 
     private void Start()
     {
         sceneIndex = SceneManager.GetActiveScene().buildIndex; // Get scene index
-
+        canPlayerMove = true;
         // MAKE THESE ARGUMENTS ARRAYS BY MAKING A VARIABLE IN THE BEGINNGING AND SETTING IT TO THAT
         #region Initial Timed Text (2D)
         switch (sceneIndex)
@@ -48,7 +50,7 @@ public class PlayerLevel2D : MonoBehaviour
     void Update()
     {
         #region Movement
-        if (Tablet.shouldPlayerMove && ThoughtCanvasManager2D.shouldPlayerMove)
+        if (ThoughtCanvasManager2D.canPlayerMove && Tablet.canPlayerMove)
         {
             if (Input.GetKey(KeyCode.W))
             {

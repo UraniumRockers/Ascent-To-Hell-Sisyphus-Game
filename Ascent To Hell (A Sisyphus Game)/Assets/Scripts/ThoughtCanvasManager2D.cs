@@ -6,11 +6,11 @@ using Unity.VisualScripting;
 
 public class ThoughtCanvasManager2D : MonoBehaviour
 {
-    public static bool shouldPlayerMove = true;           // Disables player movement
-
     private static GameObject thoughtBar;                 // The parent for all of the UI stuff
     private static TMP_Text thoughtText;                  // The text
     private static bool isEPressed = false;               // Detects if 'E' is pressed
+    public static bool canPlayerMove = true;              // Can player move
+
     void Start()
     {
         // Defining variables and deactivating variables
@@ -52,7 +52,7 @@ public class ThoughtCanvasManager2D : MonoBehaviour
     // Coroutine that creates timed text
     private IEnumerator GenerateTimedText(List<string> text, float time)
     {
-        shouldPlayerMove = false; // Player can no longer move
+        canPlayerMove = false; // Player can no longer move
 
         yield return new WaitForSeconds(0.15f); // Small initial wait
 
@@ -77,7 +77,7 @@ public class ThoughtCanvasManager2D : MonoBehaviour
         // Resets text & deactivates thought bar
         ThoughtCanvasManager2D.thoughtBar.SetActive(false);
         ThoughtCanvasManager2D.thoughtText.text = "You: ";
-        shouldPlayerMove = true; // Player can move again
+        canPlayerMove = true; // Player can move again
     }
 
     // Activate Thought Bar & Call Coroutine
