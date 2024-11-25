@@ -6,16 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLevel2D : MonoBehaviour
 {
-    public static bool canPlayerMove;                                     // Can player move
-
     [SerializeField] private float speed;                                 // Movement speed
+
+    private static bool isPlayerPrepared = false;                         // Is player ready to move on to boulder area?
+    private bool canPlayerMove = true;                                    // Can player move
     private int sceneIndex;                                               // Scene Index
-    private List<string> thoughtBarText = new List<string>();             // List of stuff to say in timed text
+    private List<string> thoughtBarText = new();                          // List of stuff to say in timed text
 
     private void Start()
     {
         sceneIndex = SceneManager.GetActiveScene().buildIndex; // Get scene index
-        canPlayerMove = true;
         // MAKE THESE ARGUMENTS ARRAYS BY MAKING A VARIABLE IN THE BEGINNGING AND SETTING IT TO THAT
         #region Initial Timed Text (2D)
         switch (sceneIndex)
@@ -50,7 +50,7 @@ public class PlayerLevel2D : MonoBehaviour
     void Update()
     {
         #region Movement
-        if (ThoughtCanvasManager2D.canPlayerMove && Tablet.canPlayerMove)
+        if (ThoughtCanvasManager2D.canPlayerMove && Tablet.canPlayerMove && canPlayerMove)
         {
             if (Input.GetKey(KeyCode.W))
             {
@@ -98,6 +98,33 @@ public class PlayerLevel2D : MonoBehaviour
                 transform.position += speed * Time.deltaTime * Vector3.left;
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.forward * 90), 200f);
             }
+        }
+        #endregion
+
+        #region Resetting Player To Origin If They Go Up Early
+        // Checks to see if player is up and not ready to be up
+        if (transform.position.x >= -9.13 && transform.position.x <= 9.13 && transform.position.y >= 8.5 && !isPlayerPrepared)
+        {
+            canPlayerMove = false;
+            thoughtBarText.Clear();
+
+            // Sets thinking text
+            switch (sceneIndex)
+            {
+                case 1:
+                    thoughtBarText.Add("I have no clue what this place is, but I don't like it.");
+                    thoughtBarText.Add("I should probably check out that tablet first...");
+                    ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
+                    break;
+                case 4:
+                case 7:
+                    thoughtBarText.Add("I'm definitely not ready for this yet.");
+                    ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
+                    break;
+            }
+            // Moves player back
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 2.5f, 0), speed * Time.deltaTime);
+            canPlayerMove = true;
         }
         #endregion
     }

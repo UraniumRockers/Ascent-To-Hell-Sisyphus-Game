@@ -9,7 +9,7 @@ public class BottomCloudScript : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             ObjectiveManager2DAndBossfight.Change2DObjectiveText("Continue down the tunnel.");
-            gameObject.GetComponents<BoxCollider2D>()[0].enabled = false;
+            gameObject.GetComponents<BoxCollider2D>()[1].enabled = false;
         }
     }
 }

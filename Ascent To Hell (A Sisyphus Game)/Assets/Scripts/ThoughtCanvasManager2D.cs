@@ -83,11 +83,11 @@ public class ThoughtCanvasManager2D : MonoBehaviour
     // Activate Thought Bar & Call Coroutine
     public static void SetThoughtBarText(List<string> text)
     {
-        ThoughtCanvasManager2D.thoughtBar.SetActive(true);
         ThoughtCanvasManager2D thoughtCanvas = GameObject.FindObjectOfType<ThoughtCanvasManager2D>();
         if (thoughtCanvas != null)
         {
-            thoughtCanvas.StartCoroutine(thoughtCanvas.GenerateTimedText(text, 0.05f));
+            ThoughtCanvasManager2D.thoughtBar.SetActive(true);
+            thoughtCanvas.StartCoroutine(thoughtCanvas.GenerateTimedText(text, 0.035f));
         }
     }
 
