@@ -49,7 +49,7 @@ public class PlayerLevel2D : MonoBehaviour
     void Update()
     {
         #region Movement
-        if (ThoughtCanvasManager2D.canPlayerMove && Tablet.canPlayerMove)
+        if (ThoughtCanvasManager2D.canPlayerMove && Tablet.canPlayerMove && Lock.canPlayerMove && DoorRotationScript.canPlayerMove)
         {
             if (Input.GetKey(KeyCode.W))
             {
