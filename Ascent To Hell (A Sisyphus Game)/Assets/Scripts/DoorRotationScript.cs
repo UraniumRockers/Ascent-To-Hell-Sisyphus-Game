@@ -7,9 +7,9 @@ public class DoorRotationScript: MonoBehaviour
 {
     public static bool canPlayerMove = true;              // Can Player Move
 
-    private static bool didAnimationStart = false;
-    private List<string> thoughtText = new();             // Thought List
+    private static bool didAnimationStart = false;        // Has the animation started yet
     private static GameObject doorRotationPoint;          // gameObject
+    private List<string> thoughtText = new();             // Thought List
     private bool hasPlayerThought = false;                // Has thought canvas been activated
     private int sceneIndex;                               // Scene Index
 
@@ -17,6 +17,7 @@ public class DoorRotationScript: MonoBehaviour
     {
         doorRotationPoint = gameObject;
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        didAnimationStart = false;
     }
 
     private void Update()
@@ -42,7 +43,6 @@ public class DoorRotationScript: MonoBehaviour
             // Determines thinking text
             switch (sceneIndex)
             {
-
                 case 1:
                     thoughtText.Add("Really? A locked door? Man...");
                     thoughtText.Add("Looks like a combination lock with 3 numbers...");
@@ -74,9 +74,9 @@ public class DoorRotationScript: MonoBehaviour
     #region Animation
     public static void OpenDoor()
     {
-        DoorRotationScript.didAnimationStart = true;
         doorRotationPoint.GetComponent<BoxCollider2D>().enabled = false;
-        doorRotationPoint.GetComponent<Animator>().Play("Door Rotation Point");
+        doorRotationPoint.GetComponent<Animator>().Play("Door Rotation Point");  // Need to make sure that this works
+        DoorRotationScript.didAnimationStart = true;                             // Still don't know if this works
         canPlayerMove = false;
     }
     #endregion
