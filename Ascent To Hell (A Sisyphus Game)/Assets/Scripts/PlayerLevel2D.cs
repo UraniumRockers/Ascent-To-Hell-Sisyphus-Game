@@ -9,7 +9,6 @@ public class PlayerLevel2D : MonoBehaviour
     [SerializeField] private float speed;                                 // Movement speed
 
     private static bool isPlayerPrepared = false;                         // Is player ready to move on to boulder area?
-    private bool canPlayerMove = true;                                    // Can player move
     private int sceneIndex;                                               // Scene Index
     private List<string> thoughtBarText = new();                          // List of stuff to say in timed text
 
@@ -50,7 +49,7 @@ public class PlayerLevel2D : MonoBehaviour
     void Update()
     {
         #region Movement
-        if (ThoughtCanvasManager2D.canPlayerMove && Tablet.canPlayerMove && canPlayerMove)
+        if (ThoughtCanvasManager2D.canPlayerMove && Tablet.canPlayerMove)
         {
             if (Input.GetKey(KeyCode.W))
             {
@@ -105,15 +104,14 @@ public class PlayerLevel2D : MonoBehaviour
         // Checks to see if player is up and not ready to be up
         if (transform.position.x >= -9.13 && transform.position.x <= 9.13 && transform.position.y >= 8.5 && !isPlayerPrepared)
         {
-            canPlayerMove = false;
-            thoughtBarText.Clear();
+            transform.position = new Vector2(transform.position.x, transform.position.y - 0.1f);
 
+            thoughtBarText.Clear();
             // Sets thinking text
             switch (sceneIndex)
             {
                 case 1:
                     thoughtBarText.Add("I have no clue what this place is, but I don't like it.");
-                    thoughtBarText.Add("I should probably check out that tablet first...");
                     ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
                     break;
                 case 4:
@@ -122,9 +120,6 @@ public class PlayerLevel2D : MonoBehaviour
                     ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
                     break;
             }
-            // Moves player back
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 2.5f, 0), speed * Time.deltaTime);
-            canPlayerMove = true;
         }
         #endregion
     }

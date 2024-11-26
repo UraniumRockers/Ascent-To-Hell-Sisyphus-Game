@@ -25,9 +25,10 @@ public class DoorRotationScript: MonoBehaviour
             // Determines thinking text
             switch (sceneIndex)
             {
+
                 case 1:
                     thoughtText.Add("Really? A locked door? Man...");
-                    thoughtText.Add("Looks like a combination lock with 4 numbers...");
+                    thoughtText.Add("Looks like a combination lock with 3 numbers...");
                     ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
                     break;
                 case 4:
@@ -39,9 +40,17 @@ public class DoorRotationScript: MonoBehaviour
                     ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
                     break;
             }
-
+            ObjectiveManager2DAndBossfight.Change2DObjectiveText("Find a 3-digit combination.");
             hasPlayerThought = true;
         }
+        else
+        {
+            thoughtText.Clear();
+            thoughtText.Add("I need a 3 digit password.");
+            ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
+            thoughtText.Clear();
+        }
+
     }
     #endregion
 

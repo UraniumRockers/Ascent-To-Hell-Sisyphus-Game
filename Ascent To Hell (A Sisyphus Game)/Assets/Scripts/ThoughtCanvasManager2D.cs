@@ -27,12 +27,12 @@ public class ThoughtCanvasManager2D : MonoBehaviour
         if (Input.GetKey(KeyCode.E))
         {
             isEPressed = true;
-            print("E is pressed");
+            // print("E is pressed");
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
             isEPressed = false;
-            print("E is no longer pressed");
+            // print("E is no longer pressed");
         }
 
         // FOR TESTING
