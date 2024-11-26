@@ -24,8 +24,7 @@ public class DoorRotationScript: MonoBehaviour
         if (didAnimationStart)
         {
             print("Animation is running");
-            AnimatorStateInfo stateInfo = doorRotationPoint.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
-            if (stateInfo.normalizedTime >= 1f)
+            if (doorRotationPoint.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime == 1)
             {
                 print("Animation is over");
                 canPlayerMove = true;
