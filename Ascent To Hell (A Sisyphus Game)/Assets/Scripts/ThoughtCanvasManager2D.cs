@@ -6,10 +6,12 @@ using Unity.VisualScripting;
 
 public class ThoughtCanvasManager2D : MonoBehaviour
 {
-    private static GameObject thoughtBar;                 // The parent for all of the UI stuff
-    private static TMP_Text thoughtText;                  // The text
-    private static bool isEPressed = false;               // Detects if 'E' is pressed
-    public static bool canPlayerMove = true;              // Can player move
+    public static bool canPlayerMove = true;                     // Can player move
+
+    [SerializeField] private float textSpeed = 0.035f;           // Text generation speed
+    private static GameObject thoughtBar;                        // The parent for all of the UI stuff
+    private static TMP_Text thoughtText;                         // The text
+    private static bool isEPressed = false;                      // Detects if 'E' is pressed
 
     void Start()
     {
@@ -50,11 +52,11 @@ public class ThoughtCanvasManager2D : MonoBehaviour
     #region Timed Text Code
 
     // Coroutine that creates timed text
-    private IEnumerator GenerateTimedText(List<string> text, float time)
+    private IEnumerator GenerateTimedText(List<string> text)
     {
         canPlayerMove = false; // Player can no longer move
 
-        yield return new WaitForSeconds(0.15f); // Small initial wait
+        yield return new WaitForSeconds(0.1f); // Small initial wait
 
         foreach (string str in text)
         {
@@ -62,12 +64,12 @@ public class ThoughtCanvasManager2D : MonoBehaviour
             foreach (char character in str)
             {
                 thoughtText.text += character;
-                yield return new WaitForSeconds(time);
+                yield return new WaitForSeconds(textSpeed);
             }
             foreach (char character in " (Press 'E' to continue)")
             {
                 thoughtText.text += character;
-                yield return new WaitForSeconds(time);
+                yield return new WaitForSeconds(textSpeed);
             }
 
             // Sets isEPressed to false and won't continue until E is pressed again
@@ -87,7 +89,7 @@ public class ThoughtCanvasManager2D : MonoBehaviour
         if (thoughtCanvas != null)
         {
             ThoughtCanvasManager2D.thoughtBar.SetActive(true);
-            thoughtCanvas.StartCoroutine(thoughtCanvas.GenerateTimedText(text, 0.035f));
+            thoughtCanvas.StartCoroutine(thoughtCanvas.GenerateTimedText(text));
         }
     }
 

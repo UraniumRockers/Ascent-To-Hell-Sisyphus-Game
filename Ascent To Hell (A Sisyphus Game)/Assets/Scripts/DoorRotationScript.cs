@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class DoorRotationScript: MonoBehaviour
 {
+    public static bool canPlayerMove = true;              // Can Player Move
+
+    private static bool didAnimationStart = false;
     private List<string> thoughtText = new();             // Thought List
     private static GameObject doorRotationPoint;          // gameObject
     private bool hasPlayerThought = false;                // Has thought canvas been activated
@@ -14,6 +17,21 @@ public class DoorRotationScript: MonoBehaviour
     {
         doorRotationPoint = gameObject;
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
+    }
+
+    private void Update()
+    {
+        if (didAnimationStart)
+        {
+            print("Animation is running");
+            AnimatorStateInfo stateInfo = doorRotationPoint.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+            if (stateInfo.normalizedTime >= 1f)
+            {
+                print("Animation is over");
+                canPlayerMove = true;
+            }
+        }
+
     }
 
     #region Timed Thought Text
@@ -57,8 +75,10 @@ public class DoorRotationScript: MonoBehaviour
     #region Animation
     public static void OpenDoor()
     {
+        DoorRotationScript.didAnimationStart = true;
         doorRotationPoint.GetComponent<BoxCollider2D>().enabled = false;
         doorRotationPoint.GetComponent<Animator>().Play("Door Rotation Point");
+        canPlayerMove = false;
     }
     #endregion
 }
