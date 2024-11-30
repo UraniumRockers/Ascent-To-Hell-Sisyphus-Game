@@ -7,31 +7,17 @@ public class DoorRotationScript: MonoBehaviour
 {
     public static bool canPlayerMove = true;              // Can Player Move
 
-    private static bool didAnimationStart = false;        // Has the animation started yet
     private static GameObject doorRotationPoint;          // gameObject
+    private static Animator animator;                     // Animator
     private List<string> thoughtText = new();             // Thought List
     private bool hasPlayerThought = false;                // Has thought canvas been activated
     private int sceneIndex;                               // Scene Index
 
     private void Start()
     {
+        // Defining variables
         doorRotationPoint = gameObject;
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        didAnimationStart = false;
-    }
-
-    private void Update()
-    {
-        if (didAnimationStart)
-        {
-            print("Animation is running");
-            if (doorRotationPoint.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime == 1)
-            {
-                print("Animation is over");
-                canPlayerMove = true;
-            }
-        }
-
     }
 
     #region Timed Thought Text
@@ -65,7 +51,6 @@ public class DoorRotationScript: MonoBehaviour
             thoughtText.Clear();
             thoughtText.Add("I need a 3 digit password.");
             ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
-            thoughtText.Clear();
         }
 
     }
@@ -74,10 +59,21 @@ public class DoorRotationScript: MonoBehaviour
     #region Animation
     public static void OpenDoor()
     {
+        animator = doorRotationPoint.GetComponent<Animator>();
         doorRotationPoint.GetComponent<BoxCollider2D>().enabled = false;
-        doorRotationPoint.GetComponent<Animator>().Play("Door Rotation Point");  // Need to make sure that this works
-        DoorRotationScript.didAnimationStart = true;                             // Still don't know if this works
+        animator.enabled = true;
+        animator.Play("Door Rotation Point");
         canPlayerMove = false;
+        print("Player can't move");
+    }
+    #endregion
+
+    #region Animation Movement
+    public void EndAnimation()
+    {
+        print("Animation is over");
+        DoorRotationScript.canPlayerMove = true;
+        print("Player can move");
     }
     #endregion
 }

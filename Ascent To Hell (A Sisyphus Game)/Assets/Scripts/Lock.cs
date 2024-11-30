@@ -13,6 +13,8 @@ public class Lock : MonoBehaviour
     private bool isCompleted = false;
     private List<TMP_Text> dropdownText = new();
     private List<GameObject> images = new();
+    //private List<int> randomNums = new();
+
 
     void Start()
     {
@@ -20,8 +22,20 @@ public class Lock : MonoBehaviour
 
         images.Add(GameObject.Find("Locked Image"));
         images.Add(GameObject.Find("Unlocked Image"));
-        lockCanvas = GameObject.Find("Combination Lock Canvas");
+        lockCanvas = GameObject.Find("Lock Canvas Components");
+
+        /*for (int i = 0; i < 3; i++)
+        {
+            randomNums.Add(Random.Range(0, 10));
+        }*/
+
         DefineVariables();
+
+        /*for (int i = 0; i < 3; i++)
+        {
+            dropdownText[i].text = $"{randomNums[i]}";
+            print($"Set dropdown number {i} to {dropdownText[i].text}");
+        }*/
 
         images[1].SetActive(false);
         lockCanvas.SetActive(false);
@@ -55,10 +69,11 @@ public class Lock : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        // ALSO THE THOUGHT TEXT WHEN RE-ENTERING THE TRIGGER IN FRONT OF DOOR DOESN'T WORK
 
         if (collision.CompareTag("Player") && keyDown)
         {
+            lockCanvas.SetActive(!lockCanvas.activeSelf);
+            keyDown = false;
             if (isCompleted)
             {
                 gameObject.GetComponent<BoxCollider2D>().enabled = false;
@@ -66,13 +81,15 @@ public class Lock : MonoBehaviour
                 gameObject.SetActive(false);
                 DoorRotationScript.OpenDoor();
                 print("Door should open");
+                canPlayerMove = true;
             }
-            lockCanvas.SetActive(!lockCanvas.activeSelf);
+            
         }
     }
 
     private void DefineVariables()
     {
+        print("This happened");
         dropdownText.Clear();
 
         if (lockCanvas.activeSelf)
@@ -81,9 +98,14 @@ public class Lock : MonoBehaviour
 
             for (int i = 1; i < 4; i++)
             {
-                dropdownText.Add(GameObject.Find($"Num {i} Dropdown").GetComponentInChildren<TMP_Text>());
+                TMP_Text text = GameObject.Find($"Num {i} Dropdown").GetComponentInChildren<TMP_Text>();
+                //text.text = $"{text.GetComponentInParent<TMP_Dropdown>().options[Random.Range(0, 10)].text}";
+                //print($"The parent has {text.GetComponentInParent<TMP_Dropdown>().options.Count} options");
+                dropdownText.Add(text);
             }
+
             print($"dropdownText list is {dropdownText.Count} items long");
+
         }
     }
 

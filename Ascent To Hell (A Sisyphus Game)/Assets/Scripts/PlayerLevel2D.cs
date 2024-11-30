@@ -100,7 +100,7 @@ public class PlayerLevel2D : MonoBehaviour
         }
         #endregion
 
-        #region Resetting Player To Origin If They Go Up Early
+        #region Telling Player They Went Up Too Early
         // Checks to see if player is up and not ready to be up
         if (transform.position.x >= -9.13 && transform.position.x <= 9.13 && transform.position.y >= 8.5 && !isPlayerPrepared)
         {
