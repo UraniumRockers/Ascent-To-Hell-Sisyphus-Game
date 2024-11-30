@@ -13,7 +13,7 @@ public class Lock : MonoBehaviour
     private bool isCompleted = false;
     private List<TMP_Text> dropdownText = new();
     private List<GameObject> images = new();
-    //private List<int> randomNums = new();
+    private string[] values = new int[3];
 
 
     void Start()
@@ -30,12 +30,6 @@ public class Lock : MonoBehaviour
         }*/
 
         DefineVariables();
-
-        /*for (int i = 0; i < 3; i++)
-        {
-            dropdownText[i].text = $"{randomNums[i]}";
-            print($"Set dropdown number {i} to {dropdownText[i].text}");
-        }*/
 
         images[1].SetActive(false);
         lockCanvas.SetActive(false);
@@ -56,6 +50,11 @@ public class Lock : MonoBehaviour
 
         canPlayerMove = !lockCanvas.activeSelf;
 
+        for (int i = 0; i < 3; i++)
+        {
+            values[i] = dropdownText[i].text;
+        }
+
         if (dropdownText.Count == 3)
         {
             if (lockCanvas.activeSelf && dropdownText[0].text == "1" && dropdownText[1].text == "4" && dropdownText[2].text == "2")
@@ -73,6 +72,10 @@ public class Lock : MonoBehaviour
         if (collision.CompareTag("Player") && keyDown)
         {
             lockCanvas.SetActive(!lockCanvas.activeSelf);
+            for (int i = 0; i < 3; i++) 
+            {
+               dropdownText[i] = values[i];
+            }
             keyDown = false;
             if (isCompleted)
             {
@@ -99,8 +102,8 @@ public class Lock : MonoBehaviour
             for (int i = 1; i < 4; i++)
             {
                 TMP_Text text = GameObject.Find($"Num {i} Dropdown").GetComponentInChildren<TMP_Text>();
-                //text.text = $"{text.GetComponentInParent<TMP_Dropdown>().options[Random.Range(0, 10)].text}";
-                //print($"The parent has {text.GetComponentInParent<TMP_Dropdown>().options.Count} options");
+                text.text = $"{text.GetComponentInParent<TMP_Dropdown>().options[Random.Range(0, 10)].text}";
+                print($"The parent has {text.GetComponentInParent<TMP_Dropdown>().options.Count} options");
                 dropdownText.Add(text);
             }
 
