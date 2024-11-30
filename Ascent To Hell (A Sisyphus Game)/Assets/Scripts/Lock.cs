@@ -13,7 +13,7 @@ public class Lock : MonoBehaviour
     private bool isCompleted = false;
     private List<TMP_Text> dropdownText = new();
     private List<GameObject> images = new();
-    private string[] values = new int[3];
+    private string[] values = new string[3];
 
 
     void Start()
