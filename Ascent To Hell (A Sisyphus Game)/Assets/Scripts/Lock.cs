@@ -13,7 +13,7 @@ public class Lock : MonoBehaviour
     private bool isCompleted = false;
     private List<TMP_Text> dropdownText = new();
     private List<GameObject> images = new();
-    private string[] values = new string[3];
+    //private string[] values = new string[3];
 
 
     void Start()
@@ -40,20 +40,20 @@ public class Lock : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             keyDown = true;
-            print("E is pressed");
+            //print("E is pressed");
         }
         else if (Input.GetKeyUp(KeyCode.E))
         {
             keyDown = false;
-            print("E is no longer pressed");
+            //print("E is no longer pressed");
         }
 
         canPlayerMove = !lockCanvas.activeSelf;
 
-        for (int i = 0; i < 3; i++)
+       /* for (int i = 0; i < 3; i++)
         {
             values[i] = dropdownText[i].text;
-        }
+        }*/
 
         if (dropdownText.Count == 3)
         {
@@ -72,10 +72,10 @@ public class Lock : MonoBehaviour
         if (collision.CompareTag("Player") && keyDown)
         {
             lockCanvas.SetActive(!lockCanvas.activeSelf);
-            for (int i = 0; i < 3; i++) 
+            /*for (int i = 0; i < 3; i++) 
             {
                dropdownText[i] = values[i];
-            }
+            }*/
             keyDown = false;
             if (isCompleted)
             {
@@ -83,7 +83,7 @@ public class Lock : MonoBehaviour
                 ObjectiveManager2DAndBossfight.Change2DObjectiveText("Continue down the tunnel");
                 gameObject.SetActive(false);
                 DoorRotationScript.OpenDoor();
-                print("Door should open");
+                //print("Door should open");
                 canPlayerMove = true;
             }
             
@@ -92,22 +92,22 @@ public class Lock : MonoBehaviour
 
     private void DefineVariables()
     {
-        print("This happened");
+        //print("This happened");
         dropdownText.Clear();
 
         if (lockCanvas.activeSelf)
         {
-            print($"images list is {images.Count} items long");
+            //print($"images list is {images.Count} items long");
 
             for (int i = 1; i < 4; i++)
             {
                 TMP_Text text = GameObject.Find($"Num {i} Dropdown").GetComponentInChildren<TMP_Text>();
-                text.text = $"{text.GetComponentInParent<TMP_Dropdown>().options[Random.Range(0, 10)].text}";
-                print($"The parent has {text.GetComponentInParent<TMP_Dropdown>().options.Count} options");
+                //text.text = $"{text.GetComponentInParent<TMP_Dropdown>().options[Random.Range(0, 10)].text}";
+                //print($"The parent has {text.GetComponentInParent<TMP_Dropdown>().options.Count} options");
                 dropdownText.Add(text);
             }
 
-            print($"dropdownText list is {dropdownText.Count} items long");
+            //print($"dropdownText list is {dropdownText.Count} items long");
 
         }
     }
