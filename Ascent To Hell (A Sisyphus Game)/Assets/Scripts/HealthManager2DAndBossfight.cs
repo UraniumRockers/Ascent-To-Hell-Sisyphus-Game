@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class HealthManager2DAndBossfight : MonoBehaviour
 {
+    public static float health;
+
     private static GameObject[] health2DAndBossfight = new GameObject[4];
     private int sceneIndex;
 
@@ -27,8 +29,28 @@ public class HealthManager2DAndBossfight : MonoBehaviour
     }
     #endregion
     #region Setting Health Functions
+    public static void DetermineSetHearts(float targetHealth)
+    {
+        switch (Mathf.Abs(targetHealth))
+        {
+            case .5f:
+                Set_5Hearts();
+                break;
+            case 1.5f:
+                Set1_5Hearts();
+                break;
+            case 2.5f:
+                Set2_5Hearts();
+                break;
+            case 3.5f:
+                Set3_5Hearts();
+                break;
+        }
+    }
+
     public static void Set_5Hearts()
     {
+        HealthManager2DAndBossfight.health = -.5f;
         // Activating -.5
         health2DAndBossfight[0].SetActive(true);
 
@@ -41,6 +63,7 @@ public class HealthManager2DAndBossfight : MonoBehaviour
 
     public static void Set1_5Hearts()
     {
+        HealthManager2DAndBossfight.health = -1.5f;
         // Activating -1.5
         health2DAndBossfight[1].SetActive(true);
 
@@ -52,6 +75,7 @@ public class HealthManager2DAndBossfight : MonoBehaviour
 
     public static void Set2_5Hearts()
     {
+        HealthManager2DAndBossfight.health = -2.5f;
         // Activating -2.5
         health2DAndBossfight[2].SetActive(true);
 
@@ -63,6 +87,7 @@ public class HealthManager2DAndBossfight : MonoBehaviour
 
     public static void Set3_5Hearts()
     {
+        HealthManager2DAndBossfight.health = -3.5f;
         // Activating -3.5
         health2DAndBossfight[3].SetActive(true);
         

@@ -64,16 +64,16 @@ public class DoorRotationScript: MonoBehaviour
         animator.enabled = true;
         animator.Play("Door Rotation Point");
         canPlayerMove = false;
-        print("Player can't move");
+        //print("Player can't move");
     }
     #endregion
 
     #region Animation Movement
     public void EndAnimation()
     {
-        print("Animation is over");
+        //print("Animation is over");
         DoorRotationScript.canPlayerMove = true;
-        print("Player can move");
+        //print("Player can move");
     }
     #endregion
 }
