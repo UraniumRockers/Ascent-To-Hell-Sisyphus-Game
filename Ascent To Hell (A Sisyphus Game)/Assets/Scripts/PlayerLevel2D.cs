@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLevel2D : MonoBehaviour
 {
-    [SerializeField] private float speed;                                 // Movement speed
+    public static bool isPlayerPrepared = false;                          // Is player ready to move on to boulder area?
 
-    private static bool isPlayerPrepared = false;                         // Is player ready to move on to boulder area?
+    [SerializeField] private float speed;                                 // Movement speed
     private int sceneIndex;                                               // Scene Index
     private List<string> thoughtBarText = new();                          // List of stuff to say in timed text
+    private bool hasPlayerGottenPressurePlateInfo = false;                // I ain't commenting this one
 
     private void Start()
     {
@@ -49,7 +50,7 @@ public class PlayerLevel2D : MonoBehaviour
     void Update()
     {
         #region Movement
-        if (ThoughtCanvasManager2D.canPlayerMove && Tablet.canPlayerMove && Lock.canPlayerMove && DoorRotationScript.canPlayerMove)
+        if (ThoughtCanvasManager2D.canPlayerMove && PressurePlate.canPlayerMove && Tablet.canPlayerMove && Lock.canPlayerMove && DoorRotationScript.canPlayerMove)
         {
             if (Input.GetKey(KeyCode.W))
             {
@@ -100,25 +101,56 @@ public class PlayerLevel2D : MonoBehaviour
         }
         #endregion
 
-        #region Telling Player They Went Up Too Early
+        #region Boulder Area Text
         // Checks to see if player is up and not ready to be up
-        if (transform.position.x >= -9.13 && transform.position.x <= 9.13 && transform.position.y >= 8.5 && !isPlayerPrepared)
+        if (transform.position.x >= -9.13 && transform.position.x <= 9.13 && transform.position.y >= 8.5)
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y - 0.1f);
-
-            thoughtBarText.Clear();
-            // Sets thinking text
-            switch (sceneIndex)
+            if (!isPlayerPrepared)
             {
-                case 1:
-                    thoughtBarText.Add("I have no clue what this place is, but I don't like it.");
-                    ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
-                    break;
-                case 4:
-                case 7:
-                    thoughtBarText.Add("I'm definitely not ready for this yet.");
-                    ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
-                    break;
+                transform.position = new Vector2(transform.position.x, transform.position.y - 0.1f);
+
+                thoughtBarText.Clear();
+                // Sets thinking text
+                switch (sceneIndex)
+                {
+                    case 1:
+                        thoughtBarText.Add("I have no clue what this place is, but I don't like it.");
+                        ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
+                        break;
+                    case 4:
+                        thoughtBarText.Add("I'm definitely not ready for this yet.");
+                        ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
+                        break;
+                    case 7:
+                        thoughtBarText.Add("...Where's the pressure plate?");
+                        ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
+                        break;
+                }
+            }
+            else
+            {
+                if (hasPlayerGottenPressurePlateInfo)
+                {
+                    thoughtBarText.Clear();
+                    switch (sceneIndex)
+                    {
+                        case 1:
+                            thoughtBarText.Add("So... I guess I just step on that pressure plate?");
+                            thoughtBarText.Add("Hopefully whatever happens isn't too bad.");
+                            ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
+                            break;
+                        case 4:
+                            thoughtBarText.Add("Here we go again.");
+                            ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
+                            break;
+                        case 7:
+                            transform.position = new Vector2(transform.position.x, transform.position.y - 0.1f);
+                            thoughtBarText.Add("Am I in the right place?");
+                            thoughtBarText.Add("This place is too empty...");
+                            ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
+                            break;
+                    }
+                }
             }
         }
         #endregion

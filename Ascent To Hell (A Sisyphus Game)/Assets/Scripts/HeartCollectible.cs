@@ -8,7 +8,6 @@ public class HeartCollectible : MonoBehaviour
 {
     private Animator animator;
     private float health;
-    private BoxCollider2D trigger;
     private int sceneIndex;
 
     // Start is called before the first frame update
@@ -16,7 +15,6 @@ public class HeartCollectible : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         animator.Play("Heart Collectible");
-        trigger = GetComponent<BoxCollider2D>();
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
@@ -24,9 +22,6 @@ public class HeartCollectible : MonoBehaviour
     void Update()
     {
         health = HealthManager2DAndBossfight.health;
-        Destroy(trigger);
-        trigger = gameObject.AddComponent<BoxCollider2D>();
-        trigger.isTrigger = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -37,9 +32,10 @@ public class HeartCollectible : MonoBehaviour
             if (sceneIndex == 1)
             {
                 List<string> thoughtText = new();
-                thoughtText.Add("Woah. That was weird. Didn't feel too bad though.");
-                thoughtText.Add("I think I'm ready for that \"challenge\" now.");
+                thoughtText.Add("Woah. Don't know what that was, but I feel a bit better now.");
+                thoughtText.Add("I think I'm ready to \"start that challenge\" now");
                 ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
+                PlayerLevel2D.isPlayerPrepared = true;
             }
             Destroy(gameObject);
         }

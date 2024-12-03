@@ -7,12 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class Tablet : MonoBehaviour
 {
-    public static bool canPlayerMove = true;                    // Can player move
+    public static bool canPlayerMove = true;                     // Can player move
 
     private GameObject tabletCanvas;                             // Canvas that shows tablet when interacted
     private GameObject redCloudBottom;                           // Bottom cloud (sprite & collider)
     private TMP_Text tabletText;                                 // Tablet tip text
     private bool keyDown = false;                                // Has 'E' been pressed
+    private bool hasPlayerInteracted = false;                    // Has the player interacted
     private bool hasPlayerThought = false;                       // Has player already done timed text
     private List<string> thoughtBarText = new List<string>();    // List of stuff to say in timed text
     
@@ -80,6 +81,7 @@ public class Tablet : MonoBehaviour
             // Enables/disables canvas and removes disables box collider, allowing the player to go down
             tabletCanvas.SetActive(!tabletCanvas.activeSelf);
             keyDown = false;
+            hasPlayerInteracted = true;
             redCloudBottom.GetComponents<BoxCollider2D>()[0].enabled = false;
             redCloudBottom.GetComponents<BoxCollider2D>()[1].enabled = true;
             redCloudBottom.GetComponent<SpriteRenderer>().enabled = true;
@@ -92,7 +94,7 @@ public class Tablet : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (!tabletCanvas.activeSelf && !hasPlayerThought)
+            if (!tabletCanvas.activeSelf && !hasPlayerThought && hasPlayerInteracted)
             {
                 switch (SceneManager.GetActiveScene().buildIndex)
                 {
