@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,10 +33,11 @@ public class HeartCollectible : MonoBehaviour
             if (sceneIndex == 1)
             {
                 List<string> thoughtText = new();
-                thoughtText.Add("Woah. Don't know what that was, but I feel a bit better now.");
-                thoughtText.Add("I think I'm ready to \"start that challenge\" now");
+                thoughtText.Add("Woah. Don't know what that was, but I feel a bit better.");
+                thoughtText.Add("I think I'm ready to do whatever that tablet was talking about now.");
                 ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
                 PlayerLevel2D.isPlayerPrepared = true;
+                ObjectiveManager2DAndBossfight.Change2DObjectiveText("Go to the pressure plate.");
             }
             Destroy(gameObject);
         }

@@ -102,7 +102,7 @@ public class Tablet : MonoBehaviour
                         thoughtBarText.Add("...Punishment? Did I do something wrong?");
                         thoughtBarText.Add("What am I talking about. This is obviously a dream.");
                         thoughtBarText.Add("Might as well go check some stuff out.");
-                        thoughtBarText.Add("That cloud over there looks kinda weird. That red's really strong...");
+                        thoughtBarText.Add("That fog over there looks kinda weird. That red's really strong...");
                         ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
                         hasPlayerThought = true;
                         break;

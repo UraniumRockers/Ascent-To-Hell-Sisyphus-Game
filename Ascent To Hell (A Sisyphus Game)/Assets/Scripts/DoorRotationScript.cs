@@ -74,6 +74,12 @@ public class DoorRotationScript: MonoBehaviour
         //print("Animation is over");
         DoorRotationScript.canPlayerMove = true;
         //print("Player can move");
+        thoughtText.Clear();
+        if (sceneIndex == 1)
+        {
+            thoughtText.Add("There we go.");
+            ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
+        }
     }
     #endregion
 }
