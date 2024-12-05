@@ -107,9 +107,9 @@ public class Tablet : MonoBehaviour
                         hasPlayerThought = true;
                         break;
                     case 4:
-                        thoughtBarText.Add("The only thing that's impossible is me understanding what the hell this dream is.");
-                        thoughtBarText.Add("I guess I just gotta burn the time til I wake up.");
-                        thoughtBarText.Add("There's that cloud again.");
+                        thoughtBarText.Add("The only thing that's impossible is me understanding what the hell's happening.");
+                        thoughtBarText.Add("I guess I just gotta burn the time 'til I wake up.");
+                        thoughtBarText.Add("There's that fog again.");
                         ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
                         hasPlayerThought = true;
                         break;

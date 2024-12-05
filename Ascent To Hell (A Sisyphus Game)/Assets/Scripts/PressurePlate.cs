@@ -39,7 +39,7 @@ public class PressurePlate : MonoBehaviour
         switch (sceneIndex) 
         {
             case 1:
-                thoughtText.Add("Woah.");
+                thoughtText.Add("...");
                 thoughtText.Add("Am... am I supposed to push that?");
                 thoughtText.Add("Well... nothing else to do, I guess.");
                 ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);

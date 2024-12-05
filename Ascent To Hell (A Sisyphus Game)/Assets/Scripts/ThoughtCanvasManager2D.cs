@@ -86,6 +86,7 @@ public class ThoughtCanvasManager2D : MonoBehaviour
     public static void SetThoughtBarText(List<string> text)
     {
         ThoughtCanvasManager2D thoughtCanvas = GameObject.FindObjectOfType<ThoughtCanvasManager2D>();
+        //thoughtBar.SetActive(true);
         if (thoughtCanvas != null)
         {
             ThoughtCanvasManager2D.thoughtBar.SetActive(true);

@@ -10,6 +10,7 @@ public class HeartCollectible : MonoBehaviour
     private Animator animator;
     private float health;
     private int sceneIndex;
+    private GameObject redCloudLeft;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,7 @@ public class HeartCollectible : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.Play("Heart Collectible");
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        redCloudLeft = GameObject.Find("Red Cloud (Left)");
     }
 
     // Update is called once per frame
@@ -38,6 +40,13 @@ public class HeartCollectible : MonoBehaviour
                 ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
                 PlayerLevel2D.isPlayerPrepared = true;
                 ObjectiveManager2DAndBossfight.Change2DObjectiveText("Go to the pressure plate.");
+            }
+            else if (sceneIndex == 4)
+            {
+                ObjectiveManager2DAndBossfight.Change2DObjectiveText("Continue exploring.");
+                redCloudLeft.GetComponents<BoxCollider2D>()[0].enabled = false;
+                redCloudLeft.GetComponents<BoxCollider2D>()[1].enabled = true;
+                redCloudLeft.GetComponent<SpriteRenderer>().enabled = true;
             }
             Destroy(gameObject);
         }

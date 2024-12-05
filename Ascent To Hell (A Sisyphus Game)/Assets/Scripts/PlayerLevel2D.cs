@@ -11,6 +11,7 @@ public class PlayerLevel2D : MonoBehaviour
     [SerializeField] private float speed;                                 // Movement speed
     private int sceneIndex;                                               // Scene Index
     private List<string> thoughtBarText = new();                          // List of stuff to say in timed text
+    private bool canPlayerThinkBoutPressurePlate = true;                  // I ain't commenting this one 
 
     private void Start()
     {
@@ -25,9 +26,9 @@ public class PlayerLevel2D : MonoBehaviour
                 ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
                 break;
             case 4:
-                thoughtBarText.Add("Here again? And what the hell was that? Is this a dream or something?");
-                thoughtBarText.Add("If it is, this is messed up. I just saw myself get frickin killed...");
-                thoughtBarText.Add("Do I have to do all of that stuff again?");
+                thoughtBarText.Add("Here again? And what the hell was that? Is this a nightmare or something?");
+                thoughtBarText.Add("I hate this. Anyways...");
+                thoughtBarText.Add("Do I have to do all of that stuff again? *sigh*");
                 ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
                 break;
             case 7:
@@ -128,24 +129,31 @@ public class PlayerLevel2D : MonoBehaviour
             }
             else
             {
-                thoughtBarText.Clear();
-                switch (sceneIndex)
+                if (canPlayerThinkBoutPressurePlate)
                 {
-                    case 1:
-                        thoughtBarText.Add("So... I guess I just step on that pressure plate?");
-                        thoughtBarText.Add("Hopefully whatever happens isn't too bad.");
-                        ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
-                        break;
-                    case 4:
-                        thoughtBarText.Add("Here we go again.");
-                        ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
-                        break;
-                    case 7:
-                        transform.position = new Vector2(transform.position.x, transform.position.y - 0.1f);
-                        thoughtBarText.Add("Am I in the right place?");
-                        thoughtBarText.Add("This place is too empty...");
-                        ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
-                        break;
+                    thoughtBarText.Clear();
+                    switch (sceneIndex)
+                    {
+                        case 1:
+                            thoughtBarText.Add("So... I guess I just step on that pressure plate?");
+                            thoughtBarText.Add("Hopefully whatever happens isn't too bad.");
+                            ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
+                            canPlayerThinkBoutPressurePlate = false;
+                            break;
+                        case 4:
+                            thoughtBarText.Add("Here we go again.");
+                            ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
+                            canPlayerThinkBoutPressurePlate = false;
+                            break;
+                        case 7:
+                            transform.position = new Vector2(transform.position.x, transform.position.y - 0.1f);
+                            thoughtBarText.Add("Am I in the right place?");
+                            thoughtBarText.Add("This place is too empty...");
+                            ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
+                            canPlayerThinkBoutPressurePlate = false;
+                            break;
+                    }
+
                 }
             }
        
