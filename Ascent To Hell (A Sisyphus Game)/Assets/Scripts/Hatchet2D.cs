@@ -12,6 +12,7 @@ public class Hatchet2D : MonoBehaviour
 
     void Start()
     {
+        isSwinging = false;
         hatchetTool = GameObject.Find("Hatchet Tool");
         if (gameObject.name != "Hatchet Tool")
         {
@@ -20,12 +21,13 @@ public class Hatchet2D : MonoBehaviour
         else
         {
             animator = gameObject.GetComponent<Animator>();
+            animator.enabled = false;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && gameObject.name != "Hatchet Tool")
         {
             thoughtText.Add("Sick, a hatchet.");
             thoughtText.Add("Not the best condition, but I'll take it.");
@@ -42,19 +44,21 @@ public class Hatchet2D : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse0) && !isSwinging)
             {
+                animator.enabled = true;
                 isSwinging = true;
                 gameObject.GetComponent<PolygonCollider2D>().isTrigger = true;
                 animator.Play("Hatchet Swing");
-                print("Hatchet Swing");
+                print("Hatchet Swing Begin");
+                print(animator.updateMode);
             }
-
         }
     }
 
     public void SetAnimationOver()
     {
+        print("Hatchet Swing Over");
         isSwinging = false;
         gameObject.GetComponent<PolygonCollider2D>().isTrigger = false;
-
+        animator.enabled = false;
     }
 }
