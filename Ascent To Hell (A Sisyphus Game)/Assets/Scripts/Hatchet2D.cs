@@ -44,12 +44,11 @@ public class Hatchet2D : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse0) && !isSwinging)
             {
-                animator.enabled = true;
                 isSwinging = true;
-                gameObject.GetComponent<PolygonCollider2D>().isTrigger = true;
+                animator.enabled = true;
                 animator.Play("Hatchet Swing");
                 print("Hatchet Swing Begin");
-                print(animator.updateMode);
+                gameObject.tag = "Hatchet";
             }
         }
     }
@@ -58,7 +57,7 @@ public class Hatchet2D : MonoBehaviour
     {
         print("Hatchet Swing Over");
         isSwinging = false;
-        gameObject.GetComponent<PolygonCollider2D>().isTrigger = false;
         animator.enabled = false;
+        gameObject.tag = "";
     }
 }

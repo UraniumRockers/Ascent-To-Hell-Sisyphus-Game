@@ -1,0 +1,63 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class Barricade : MonoBehaviour
+{
+    private GameObject[] barricades = new GameObject[3];
+    private int swingCounter = 0;
+    private bool hasPlayerEnteredForFirstTime = false;
+    private List<string> thoughtText = new();
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        hasPlayerEnteredForFirstTime = false;
+        barricades[0] = GameObject.Find("Barricade 0");
+        barricades[1] = GameObject.Find("Barricade 1");
+        barricades[2] = GameObject.Find("Barricade 2");
+
+        barricades[1].SetActive(false);
+        barricades[2].SetActive(false);
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        switch (swingCounter)
+        {
+            case 2:
+                barricades[0].SetActive(false);
+                barricades[1].SetActive(true);
+                break;
+            case 4:
+                barricades[1].SetActive(false);
+                barricades[2].SetActive(true);
+                gameObject.GetComponents<BoxCollider2D>()[1].enabled = false;
+                ObjectiveManager2DAndBossfight.Change2DObjectiveText("Continue down the tunnel.");
+                break;
+        }        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && !hasPlayerEnteredForFirstTime)
+        {
+            ObjectiveManager2DAndBossfight.Change2DObjectiveText("Take down the barricade.");
+            thoughtText.Add("I definitely can't get passed that.");
+            thoughtText.Add("If I can find something to tear it down...");
+            ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
+            hasPlayerEnteredForFirstTime = true;
+            gameObject.GetComponents<BoxCollider2D>()[0].enabled = false;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Hatchet") && hasPlayerEnteredForFirstTime)
+        {
+            swingCounter++;
+        }
+    }
+}
