@@ -5,10 +5,11 @@ using TMPro;
 
 public class Hatchet2D : MonoBehaviour
 {
+    public static bool isSwinging = false;
+
     private GameObject hatchetTool;
     private List<string> thoughtText = new();
     private Animator animator;
-    private bool isSwinging = false;
 
     void Start()
     {
@@ -47,7 +48,7 @@ public class Hatchet2D : MonoBehaviour
                 isSwinging = true;
                 animator.enabled = true;
                 animator.Play("Hatchet Swing");
-                print("Hatchet Swing Begin");
+                //print("Hatchet Swing Begin");
                 gameObject.tag = "Hatchet";
             }
         }
@@ -55,7 +56,7 @@ public class Hatchet2D : MonoBehaviour
 
     public void SetAnimationOver()
     {
-        print("Hatchet Swing Over");
+        //print("Hatchet Swing Over");
         isSwinging = false;
         animator.enabled = false;
         gameObject.tag = "";

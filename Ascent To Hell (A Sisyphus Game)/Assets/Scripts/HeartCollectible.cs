@@ -34,19 +34,36 @@ public class HeartCollectible : MonoBehaviour
             HealthManager2DAndBossfight.DetermineSetHearts(health - 1);
             if (sceneIndex == 1)
             {
-                List<string> thoughtText = new();
-                thoughtText.Add("Woah. Don't know what that was, but I feel a bit better.");
-                thoughtText.Add("I think I'm ready to do whatever that tablet was talking about now.");
+                List<string> thoughtText = new()
+                {
+                    "Woah. Don't know what that was, but I feel a bit better.",
+                    "I think I'm ready to do whatever that tablet was talking about now."
+                };
                 ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
                 PlayerLevel2D.isPlayerPrepared = true;
                 ObjectiveManager2DAndBossfight.Change2DObjectiveText("Go to the pressure plate.");
             }
             else if (sceneIndex == 4)
             {
-                ObjectiveManager2DAndBossfight.Change2DObjectiveText("Continue exploring.");
-                redCloudLeft.GetComponents<BoxCollider2D>()[0].enabled = false;
-                redCloudLeft.GetComponents<BoxCollider2D>()[1].enabled = true;
-                redCloudLeft.GetComponent<SpriteRenderer>().enabled = true;
+                if (gameObject.transform.position.x <= -35)
+                {
+                    ObjectiveManager2DAndBossfight.Change2DObjectiveText("Go to the pressure plate.");
+                    PlayerLevel2D.isPlayerPrepared = true;
+                    List<string> thoughtText = new()
+                    {
+                        "Oh hey, this again. Nice.",
+                        "That boulder doesn't stand a chance.",
+                        "...I hope."
+                    };
+                    ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
+                }
+                else
+                {
+                    ObjectiveManager2DAndBossfight.Change2DObjectiveText("Continue exploring.");
+                    redCloudLeft.GetComponents<BoxCollider2D>()[0].enabled = false;
+                    redCloudLeft.GetComponents<BoxCollider2D>()[1].enabled = true;
+                    redCloudLeft.GetComponent<SpriteRenderer>().enabled = true;
+                }
             }
             Destroy(gameObject);
         }

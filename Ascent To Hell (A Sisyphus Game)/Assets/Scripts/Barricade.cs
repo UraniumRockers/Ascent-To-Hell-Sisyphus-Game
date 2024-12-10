@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Barricade : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class Barricade : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //print($"Barricade has been swung {swingCounter} times");
         switch (swingCounter)
         {
             case 2:
@@ -37,6 +39,18 @@ public class Barricade : MonoBehaviour
                 barricades[2].SetActive(true);
                 gameObject.GetComponents<BoxCollider2D>()[1].enabled = false;
                 ObjectiveManager2DAndBossfight.Change2DObjectiveText("Continue down the tunnel.");
+                GameObject.Find("Hatchet Tool").SetActive(false);
+                
+                if (SceneManager.GetActiveScene().buildIndex == 4)
+                {
+                    List<string> thoughtText = new()
+                    {
+                        "Nice, that worked.",
+                        "I'll keep this hatchet for later."
+                    };
+                    ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
+                }
+
                 break;
         }        
     }
@@ -55,9 +69,10 @@ public class Barricade : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Hatchet") && hasPlayerEnteredForFirstTime)
+        if (collision.CompareTag("Hatchet") && Hatchet2D.isSwinging && hasPlayerEnteredForFirstTime)
         {
             swingCounter++;
+            Hatchet2D.isSwinging = false;
         }
     }
 }
