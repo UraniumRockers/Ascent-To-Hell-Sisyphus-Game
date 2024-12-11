@@ -7,6 +7,7 @@ public class Hatchet2D : MonoBehaviour
 {
     public static bool isSwinging = false;
 
+    private bool isAnimPlaying = false;
     private GameObject hatchetTool;
     private List<string> thoughtText = new();
     private Animator animator;
@@ -14,6 +15,7 @@ public class Hatchet2D : MonoBehaviour
     void Start()
     {
         isSwinging = false;
+        isAnimPlaying = false;
         hatchetTool = GameObject.Find("Hatchet Tool");
         if (gameObject.name != "Hatchet Tool")
         {
@@ -43,9 +45,10 @@ public class Hatchet2D : MonoBehaviour
     {
         if (gameObject.name == "Hatchet Tool")
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0) && !isSwinging)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && !isAnimPlaying && !isSwinging)
             {
                 isSwinging = true;
+                isAnimPlaying = true;
                 animator.enabled = true;
                 animator.Play("Hatchet Swing");
                 //print("Hatchet Swing Begin");
@@ -58,6 +61,7 @@ public class Hatchet2D : MonoBehaviour
     {
         //print("Hatchet Swing Over");
         isSwinging = false;
+        isAnimPlaying = false;
         animator.enabled = false;
         gameObject.tag = "";
     }

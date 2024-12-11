@@ -10,10 +10,12 @@ public class Barricade : MonoBehaviour
     private int swingCounter = 0;
     private bool hasPlayerEnteredForFirstTime = false;
     private List<string> thoughtText = new();
+    private bool hasObjectiveTextBeenChanged = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        hasObjectiveTextBeenChanged = false;
         hasPlayerEnteredForFirstTime = false;
         barricades[0] = GameObject.Find("Barricade 0");
         barricades[1] = GameObject.Find("Barricade 1");
@@ -38,19 +40,23 @@ public class Barricade : MonoBehaviour
                 barricades[1].SetActive(false);
                 barricades[2].SetActive(true);
                 gameObject.GetComponents<BoxCollider2D>()[1].enabled = false;
-                ObjectiveManager2DAndBossfight.Change2DObjectiveText("Continue down the tunnel.");
-                GameObject.Find("Hatchet Tool").SetActive(false);
-                
-                if (SceneManager.GetActiveScene().buildIndex == 4)
-                {
-                    List<string> thoughtText = new()
-                    {
-                        "Nice, that worked.",
-                        "I'll keep this hatchet for later."
-                    };
-                    ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
-                }
 
+                if (!hasObjectiveTextBeenChanged)
+                {
+                    ObjectiveManager2DAndBossfight.Change2DObjectiveText("Continue down the tunnel.");
+                    hasObjectiveTextBeenChanged = true;
+                    GameObject.Find("Hatchet Tool").SetActive(false);
+
+                    if (SceneManager.GetActiveScene().buildIndex == 4)
+                    {
+                        List<string> thoughtText = new()
+                        {
+                            "Nice, that worked.",
+                            "I'll keep this hatchet for later."
+                        };
+                        ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
+                    }
+                }
                 break;
         }        
     }

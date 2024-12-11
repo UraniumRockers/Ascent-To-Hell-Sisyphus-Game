@@ -1180,7 +1180,7 @@ Animator:
   m_GameObject: {fileID: 251428132}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 70383d5c38995bb448f318cf785cd5c1, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9160430c09d6df14d816f8b40450795e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -8444,6 +8444,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2911632675801865409, guid: 1434bee61030c114191fde2e626f11b2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.2099609
+      objectReference: {fileID: 0}
     - target: {fileID: 7884244059434245194, guid: 1434bee61030c114191fde2e626f11b2, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -10423,7 +10427,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2096756032
 Transform:
   m_ObjectHideFlags: 0
