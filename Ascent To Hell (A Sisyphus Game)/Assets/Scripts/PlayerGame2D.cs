@@ -19,19 +19,19 @@ public class PlayerGame2D : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W) && transform.position.y <= -1)
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y + moveSpeed * Time.deltaTime);
+            transform.position += moveSpeed * Time.deltaTime * Vector3.up;
         }
         if (Input.GetKey(KeyCode.S) && transform.position.y >= -4.99)
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y - moveSpeed * Time.deltaTime);
+            transform.position += moveSpeed * Time.deltaTime * Vector3.down;
         }
         if (Input.GetKey(KeyCode.D) && transform.position.x <= 5.22)
         {
-            transform.position = new Vector2(transform.position.x + moveSpeed * Time.deltaTime, transform.position.y);
+            transform.position += moveSpeed * Time.deltaTime * Vector3.right;
         }
         if (Input.GetKey(KeyCode.A) && transform.position.x >= -5.04)
         {
-            transform.position = new Vector2(transform.position.x - moveSpeed * Time.deltaTime, transform.position.y);
+            transform.position += moveSpeed * Time.deltaTime * Vector3.left;
         }
 
     }
