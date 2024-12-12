@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Sub Level Detector
   - Hatchet
+  - Mountain
   layers:
   - Default
   - TransparentFX
