@@ -25,7 +25,7 @@ public class AltitudeCanvasManager2D : MonoBehaviour
     {
         if (Time.time - initialTime >= waitTime)
         {
-            print("Altitude Increase");
+            //print("Altitude Increase");
             altitudeText.text = $"Altitude: {altitude}m";
             altitude++;
             initialTime = Time.time;

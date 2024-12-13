@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerGame2D : MonoBehaviour
@@ -11,7 +10,7 @@ public class PlayerGame2D : MonoBehaviour
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float smallScale = 0.8f;
     [SerializeField] private float bigScale = 1f;
-    private float maxAlt = -1;
+    private float maxAlt = 0;
     private float minAlt = -4.99f;
 
 
@@ -24,7 +23,7 @@ public class PlayerGame2D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W) && transform.position.y <= -1)
+        if (Input.GetKey(KeyCode.W) && transform.position.y <= 0)
         {
             transform.position += moveSpeed * Time.deltaTime * Vector3.up;
         }
