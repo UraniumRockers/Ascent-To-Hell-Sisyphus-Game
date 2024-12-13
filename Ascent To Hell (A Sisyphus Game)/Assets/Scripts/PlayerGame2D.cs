@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerGame2D : MonoBehaviour
@@ -7,6 +9,11 @@ public class PlayerGame2D : MonoBehaviour
     public static bool didPlayerFail = false;
 
     [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private float smallScale = 0.8f;
+    [SerializeField] private float bigScale = 1f;
+    private float maxAlt = -1;
+    private float minAlt = -4.99f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +40,11 @@ public class PlayerGame2D : MonoBehaviour
         {
             transform.position += moveSpeed * Time.deltaTime * Vector3.left;
         }
+
+        float t = Mathf.InverseLerp(minAlt, maxAlt, transform.position.y);
+        float scale = Mathf.Lerp(bigScale, smallScale, t);
+        transform.localScale = new Vector2(scale, scale);
+
 
     }
 }

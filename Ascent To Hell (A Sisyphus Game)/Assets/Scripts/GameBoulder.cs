@@ -15,22 +15,24 @@ public class GameBoulder : MonoBehaviour
     void Start()
     {
         playerBoulder = GameObject.Find("Player Boulder");
-        fallingBoulder = GameObject.Find("Falling Boulder");
-        fallingBoulder.GetComponent<SpriteRenderer>().enabled = false;
+        //fallingBoulder = GameObject.Find("Falling Boulder");
+        //fallingBoulder.GetComponent<SpriteRenderer>().enabled = false;
         
         //playerBoulderAnim = playerBoulder.GetComponent<Animator>();
         //fallingBoulderAnim = fallingBoulder.GetComponent<Animator>();
         //fallingBoulderAnim.Play("Boulder Roll");
         //playerBoulderAnim.Play("Boulder Roll");
+
+        /// WILL PROBABLY MAKE IT SO THAT THE FAILING BOULDER GETS CREATED AFTER GAME ENDS WITH ROTATION AND SCALE VALUES OF THE GAME BOULDER SO NO LOOK WEIRD
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.Rotate(0, 0, -rotationSpeed * Time.deltaTime, Space.World);
-        if (gameObject.name == "Falling Bolder" && !PlayerGame2D.didPlayerFail)
-        {
-            transform.position = playerBoulder.transform.position;
-        }
+        //if (gameObject.name == "Falling Bolder" && !PlayerGame2D.didPlayerFail)
+        //{
+        //    transform.position = playerBoulder.transform.position;
+        //}
     }
 }
