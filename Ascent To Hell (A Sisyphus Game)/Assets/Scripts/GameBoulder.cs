@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameBoulder : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed = 1;
+    private Rigidbody2D rbParent;
     private GameObject playerBoulder;
     private GameObject fallingBoulder;
     private Animator playerBoulderAnim;
@@ -15,9 +16,10 @@ public class GameBoulder : MonoBehaviour
     void Start()
     {
         playerBoulder = GameObject.Find("Player Boulder");
+        rbParent = gameObject.GetComponentInParent<Rigidbody2D>();
         //fallingBoulder = GameObject.Find("Falling Boulder");
         //fallingBoulder.GetComponent<SpriteRenderer>().enabled = false;
-        
+
         //playerBoulderAnim = playerBoulder.GetComponent<Animator>();
         //fallingBoulderAnim = fallingBoulder.GetComponent<Animator>();
         //fallingBoulderAnim.Play("Boulder Roll");
@@ -35,13 +37,24 @@ public class GameBoulder : MonoBehaviour
         //    transform.position = playerBoulder.transform.position;
         //}
     }
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Wind") && HealthManager2DAndBossfight.health != -.5f)
-    //    {
-    //        HealthManager2DAndBossfight.DetermineSetHearts(HealthManager2DAndBossfight.health++);
-    //        print("Health Decreased");
-    //    }
-    //    print("Collided");
-    //}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Wind"))
+        {
+            if (collision.gameObject.transform.eulerAngles.y == 180)
+            {
+                rbParent.AddForce(new Vector2(-Random.Range(750, 1500), 0));
+            }
+            else
+            {
+                rbParent.AddForce(new Vector2(Random.Range(750, 1500), 0));
+            }
+        }
+        else if (collision.CompareTag("Debris"))
+        {
+            rbParent.AddForce(new Vector2(0, -Random.Range(1000, 2000)));
+        }
+    }
+
 }

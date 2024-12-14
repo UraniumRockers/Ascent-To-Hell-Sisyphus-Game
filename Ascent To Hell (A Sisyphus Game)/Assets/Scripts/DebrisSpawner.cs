@@ -51,7 +51,7 @@ public class DebrisSpawner : MonoBehaviour
         float randTime = Random.Range(0.25f, 1);
         if (debrisCount < maxDebrisCount && Time.time - initialTime >= randTime)
         {
-            print("Fake coroutine ran");
+            //print("Fake coroutine ran");
             initialTime = Time.time;
             Quaternion rotation = Quaternion.Euler(new Vector3(Random.Range(0, 1) * 180, Random.Range(0, 1) * 180, Random.Range(0, 361)));
             debrisObstacle = Instantiate(debrisPrefab, transform.position, rotation);

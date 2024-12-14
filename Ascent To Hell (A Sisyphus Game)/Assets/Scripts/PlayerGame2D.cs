@@ -51,11 +51,11 @@ public class PlayerGame2D : MonoBehaviour
             {
                 transform.position += moveSpeed * Time.deltaTime * Vector3.down;
             }
-            if (Input.GetKey(KeyCode.D) && transform.position.x <= 5.22)
+            if (Input.GetKey(KeyCode.D) && transform.position.x <= 6)
             {
                 transform.position += moveSpeed * Time.deltaTime * Vector3.right;
             }
-            if (Input.GetKey(KeyCode.A) && transform.position.x >= -5.04)
+            if (Input.GetKey(KeyCode.A) && transform.position.x >= -6)
             {
                 transform.position += moveSpeed * Time.deltaTime * Vector3.left;
             }
@@ -77,11 +77,11 @@ public class PlayerGame2D : MonoBehaviour
         {
             if (collision.gameObject.transform.eulerAngles.y == 180)
             {
-                rb.AddForce(new Vector2(-Random.Range(1, 3), 0));
+                rb.AddForce(new Vector2(-Random.Range(750, 1500), 0));
             }
             else
             {
-                rb.AddForce(new Vector2(Random.Range(1, 3), 0));
+                rb.AddForce(new Vector2(Random.Range(750, 1500), 0));
             }
             print("Force was added");
         }

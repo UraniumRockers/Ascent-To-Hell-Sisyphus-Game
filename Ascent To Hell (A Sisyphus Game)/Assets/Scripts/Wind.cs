@@ -8,11 +8,13 @@ public class Wind : MonoBehaviour
 {
     private float windSpeed;
     private int sceneIndex;
+    private bool collided;
     //private Rigidbody2D rb;
 
     // Start is called before the first frame update
     private void Start()
     {
+        collided = false;
         //rb = gameObject.GetComponent<Rigidbody2D>();
         gameObject.AddComponent<PolygonCollider2D>();
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -85,25 +87,28 @@ public class Wind : MonoBehaviour
         //    WindSpawner.windCount--;
         //    Destroy(gameObject);
         //}
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !collided)
         {
-            Destroy(gameObject);
+            collided = true;
             WindSpawner.windCount--;
+            print("wind count reduced");
+            Destroy(gameObject);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Boulder") || collision.CompareTag("Player"))
+        if (collision.CompareTag("Boulder") && !collided)
         {
-            print($"Wind Hit {collision.tag}");
+            //print($"Wind Hit {collision.tag}");
+            collided = true;
             if (HealthManager2DAndBossfight.health != -.5f)
             {
                 HealthManager2DAndBossfight.DetermineSetHearts(HealthManager2DAndBossfight.health + 1);
-                print("Health decreased");
+                //print("Health decreased");
             }
-            Destroy(gameObject);
             WindSpawner.windCount--;
+            print("wind count reduced");
+            Destroy(gameObject);
         }
     }
-
 }

@@ -461,12 +461,18 @@ PolygonCollider2D:
       - {x: -2.7098622, y: -1.8289608}
       - {x: -2.9995928, y: -2.4589767}
       - {x: -2.8750203, y: -2.4895086}
-      - {x: -2.6205974, y: -1.8931329}
+      - {x: -0.9709304, y: -2.3680656}
+      - {x: -1.3101518, y: -2.0325532}
+      - {x: -2.6985044, y: -2.0493507}
       - {x: -1.219413, y: 1.770153}
       - {x: 1.2713656, y: 1.814774}
-      - {x: 3.011158, y: -2.6769557}
+      - {x: 2.756569, y: -1.992607}
+      - {x: 1.5260931, y: -2.002169}
+      - {x: -1.3017633, y: -2.0236604}
+      - {x: -1.026192, y: -2.3088398}
+      - {x: 2.7881472, y: -2.1002402}
       - {x: 3.0858138, y: -2.6411123}
-      - {x: 3.1031423, y: -2.6453662}
+      - {x: 2.8718722, y: -2.1130135}
   m_UseDelaunayMesh: 0
 --- !u!1 &837949688
 GameObject:
@@ -812,9 +818,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.046390295, y: 1.8787763}
+  m_Offset: {x: -0.046390057, y: 1.8494935}
   serializedVersion: 2
-  m_Radius: 1.5240948
+  m_Radius: 1.3874435
 --- !u!50 &891817036
 Rigidbody2D:
   serializedVersion: 4
@@ -828,8 +834,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_LinearDrag: 20
+  m_AngularDrag: 20
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -886,11 +892,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c08edb01bcab79a4f81e95206f327598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  countForTesting: 0
   sprites:
   - {fileID: 21300000, guid: fd89ef187bdf9d74888106372ca90636, type: 3}
   - {fileID: 21300000, guid: 5eadf21ac47be3d498e35916d6177c2a, type: 3}
   - {fileID: 21300000, guid: 09b4fe0c34c9a9d47bceb19c5c5226c0, type: 3}
   debrisPrefab: {fileID: 6957816161091904775, guid: 884062e7fdddc3145b6ec6a190df74c7, type: 3}
+  maxDebrisCount: 0
 --- !u!1 &1194540768
 GameObject:
   m_ObjectHideFlags: 0

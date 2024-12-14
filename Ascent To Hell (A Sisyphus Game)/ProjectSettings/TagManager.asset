@@ -9,6 +9,7 @@ TagManager:
   - Mountain
   - Boulder
   - Wind
+  - Debris
   layers:
   - Default
   - TransparentFX
