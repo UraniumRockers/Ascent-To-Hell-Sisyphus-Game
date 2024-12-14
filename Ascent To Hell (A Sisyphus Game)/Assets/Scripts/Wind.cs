@@ -1,68 +1,109 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Wind : MonoBehaviour
 {
-    //private GameObject[] sprites = new GameObject[3];
-    [SerializeField] Sprite[] sprites;
-    [SerializeField] GameObject windPrefab;
-    private int windCount;
     private float windSpeed;
-    private GameObject windObstacle;
-    private Vector2[,] spawnPoints = { { new Vector2(-10.5f, 1.7f), new Vector2(-10.5f, -.78f), new Vector2(-10.5f, -3.64f) }, { new Vector2(10.5f, 1.7f), new Vector2(10.5f, -.78f), new Vector2(10.5f, -3.64f) } };
+    private int sceneIndex;
+    //private Rigidbody2D rb;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        windCount = 0;
+        //rb = gameObject.GetComponent<Rigidbody2D>();
+        gameObject.AddComponent<PolygonCollider2D>();
+        sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        switch (sceneIndex)
+        {
+            case 2:
+                windSpeed = Random.Range(2, 5);
+                break;
+            case 5:
+                windSpeed = Random.Range(3, 6);
+                break;
+            case 8:
+                windSpeed = Random.Range(4, 7);
+                break;
+        }
+
+
+        switch (transform.position.y)
+        {
+            case 1.7f:
+                transform.localScale = Vector3.one * .8f;
+                break;
+            case -.78f:
+                transform.localScale = Vector3.one * .9f;
+                break;
+            case -3.64f:
+                transform.localScale = Vector3.one;
+                break;
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (windCount == 0 && gameObject.name == "Wind Spawner")
-        {
-            windSpeed = Random.Range(3, 6);
-            int firstIndex = Random.Range(0, 2);
-            int secondIndex = Random.Range(0, 3);
-            print($"First Index: {firstIndex}");
-            print($"Second Index: {secondIndex}");
-            Quaternion rotation = (firstIndex == 1) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
-            print($"Spawn Position: {spawnPoints[firstIndex, secondIndex]}");
-            windObstacle = Instantiate(windPrefab, spawnPoints[firstIndex, secondIndex], rotation);
-            windObstacle.GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, 3)];
-            windCount++;
-            //print("Wind was spawned");
 
-        }
-        
-        if (windObstacle.transform.rotation.y == 180)
+        if (gameObject.transform.eulerAngles.y == 180)
         {
-            if (windObstacle.transform.position.x >= -10.85)
+            if (gameObject.transform.position.x >= -10.85)
             {
-                windObstacle.transform.position += windSpeed * Time.deltaTime * Vector3.left;
+                gameObject.transform.position += windSpeed * Time.deltaTime * Vector3.left;
             }
             else
             {
-                windCount--;
-                Destroy(windObstacle);
+                WindSpawner.windCount--;
+                Destroy(gameObject);
                 //print("Wind was destroyed");
             }
         }
         else
         {
-            if (windObstacle.transform.position.x <= 10.85)
+            if (gameObject.transform.position.x <= 10.85)
             {
-                windObstacle.transform.position += windSpeed * Time.deltaTime * Vector3.right;
+                gameObject.transform.position += windSpeed * Time.deltaTime * Vector3.right;
             }
             else
             {
-                windCount--;
-                //Destroy(windObstacle);
-                print("Wind was destroyed");
+                WindSpawner.windCount--;
+                Destroy(gameObject);
+                //print("Wind was destroyed");
             }
         }
+
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //if (collision.gameObject.CompareTag("Boulder"))
+        //{
+        //    WindSpawner.windCount--;
+        //    Destroy(gameObject);
+        //}
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+            WindSpawner.windCount--;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Boulder") || collision.CompareTag("Player"))
+        {
+            print($"Wind Hit {collision.tag}");
+            if (HealthManager2DAndBossfight.health != -.5f)
+            {
+                HealthManager2DAndBossfight.DetermineSetHearts(HealthManager2DAndBossfight.health + 1);
+                print("Health decreased");
+            }
+            Destroy(gameObject);
+            WindSpawner.windCount--;
+        }
+    }
+
 }

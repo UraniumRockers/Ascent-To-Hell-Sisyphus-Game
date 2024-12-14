@@ -35,4 +35,13 @@ public class GameBoulder : MonoBehaviour
         //    transform.position = playerBoulder.transform.position;
         //}
     }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Wind") && HealthManager2DAndBossfight.health != -.5f)
+    //    {
+    //        HealthManager2DAndBossfight.DetermineSetHearts(HealthManager2DAndBossfight.health++);
+    //        print("Health Decreased");
+    //    }
+    //    print("Collided");
+    //}
 }

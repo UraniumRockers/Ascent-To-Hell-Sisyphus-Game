@@ -8,6 +8,7 @@ TagManager:
   - Hatchet
   - Mountain
   - Boulder
+  - Wind
   layers:
   - Default
   - TransparentFX
