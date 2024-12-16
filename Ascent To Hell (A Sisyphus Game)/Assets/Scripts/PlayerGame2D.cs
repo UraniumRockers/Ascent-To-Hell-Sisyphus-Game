@@ -62,7 +62,7 @@ public class PlayerGame2D : MonoBehaviour
             rb.freezeRotation = false;
             //int addedForce = Random.Range(15, 20);
             //Vector2 force = new Vector2(Random.Range(-750, 1500), Random.Range(750, 1250));
-            Vector2 force = new Vector2(1000, 1000);
+            Vector2 force = new Vector2(Random.Range(-1000, 1000), Random.Range(-1000, 1000));
             print($"Force applied: {force}");
             rb.AddForce(force);
             //print($"Player force: {addedForce}");

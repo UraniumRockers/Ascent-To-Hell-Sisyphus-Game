@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -44,6 +45,13 @@ public class GameBoulder : MonoBehaviour
                 //rb.AddForce(new Vector2(Random.Range(80, 101) / 100 * (Random.Range(-1, 2) * 50000), 35000));
             }
 
+            if (transform.position.y <= -9)
+            {
+                GameObject failCanvas = GameObject.Find("Fail Canvas");
+                failCanvas.SetActive(true);
+                failCanvas.GetComponentInChildren<TMP_Text>().text = $"Altitude: {AltitudeCanvasManager2D.altitude}/1000m";
+                
+            }
             //float t = Mathf.InverseLerp(-6, failPoint.y, transform.position.y);
             //float scale = Mathf.Lerp(.99f, failScale.x, t);
             //transform.localScale = new Vector2(scale, scale);
