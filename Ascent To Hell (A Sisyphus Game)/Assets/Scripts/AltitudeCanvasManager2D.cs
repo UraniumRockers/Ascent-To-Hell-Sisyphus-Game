@@ -7,9 +7,10 @@ using System.Runtime.CompilerServices;
 
 public class AltitudeCanvasManager2D : MonoBehaviour
 {
+    public static int altitude;
+    
     [SerializeField] private float waitTime = 0.5f;
     private TMP_Text altitudeText;
-    private int altitude;
     private float initialTime;
     
 
@@ -23,7 +24,7 @@ public class AltitudeCanvasManager2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Time.time - initialTime >= waitTime)
+        if (Time.time - initialTime >= waitTime && !PlayerGame2D.didPlayerFail)
         {
             //print("Altitude Increase");
             altitudeText.text = $"Altitude: {altitude}m";

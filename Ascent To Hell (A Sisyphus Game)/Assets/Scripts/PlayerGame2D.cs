@@ -15,12 +15,15 @@ public class PlayerGame2D : MonoBehaviour
     private int sceneIndex;
     private float maxAlt = 0;
     private float minAlt = -4.99f;
+    private float targetAlt;
+    private bool hasPlayerFallen = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        hasPlayerFallen = false;
         didPlayerFail = false;
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
         ObjectiveManager2DAndBossfight.Change2DObjectiveText("Reach 1000m");
@@ -28,12 +31,15 @@ public class PlayerGame2D : MonoBehaviour
         {
             case 2:
                 HealthManager2DAndBossfight.Set1_5Hearts();
+                targetAlt = 333;
                 break;
             case 5:
                 HealthManager2DAndBossfight.Set2_5Hearts();
+                targetAlt = 666;
                 break;
             case 8:
                 HealthManager2DAndBossfight.Set3_5Hearts();
+                targetAlt = 999;
                 break;
         }
     }
@@ -41,6 +47,28 @@ public class PlayerGame2D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!hasPlayerFallen && HealthManager2DAndBossfight.health == -.5f && AltitudeCanvasManager2D.altitude <= targetAlt)
+        {
+            didPlayerFail = true;
+            GameObject.Find("Sky").GetComponent<Animator>().enabled = false;
+            gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+            gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            //rb.drag = 0f;
+            rb.gravityScale = 1f;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = 0;
+            rb.angularDrag = 0.05f;
+            rb.drag = 0;
+            rb.freezeRotation = false;
+            //int addedForce = Random.Range(15, 20);
+            //Vector2 force = new Vector2(Random.Range(-750, 1500), Random.Range(750, 1250));
+            Vector2 force = new Vector2(1000, 1000);
+            print($"Force applied: {force}");
+            rb.AddForce(force);
+            //print($"Player force: {addedForce}");
+            hasPlayerFallen = true;
+        }
+
         if (!didPlayerFail)
         {
             if (Input.GetKey(KeyCode.W) && transform.position.y <= 0)
@@ -59,11 +87,12 @@ public class PlayerGame2D : MonoBehaviour
             {
                 transform.position += moveSpeed * Time.deltaTime * Vector3.left;
             }
-        }
 
-        float t = Mathf.InverseLerp(minAlt, maxAlt, transform.position.y);
-        float scale = Mathf.Lerp(bigScale, smallScale, t);
-        transform.localScale = new Vector2(scale, scale);
+
+            float t = Mathf.InverseLerp(minAlt, maxAlt, transform.position.y);
+            float scale = Mathf.Lerp(bigScale, smallScale, t);
+            transform.localScale = new Vector2(scale, scale);
+        }
 
         if (HealthManager2DAndBossfight.health == -.5)
         {
@@ -73,7 +102,7 @@ public class PlayerGame2D : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Wind"))
+        if (collision.gameObject.CompareTag("Wind") && !didPlayerFail)
         {
             if (collision.gameObject.transform.eulerAngles.y == 180)
             {
@@ -84,6 +113,7 @@ public class PlayerGame2D : MonoBehaviour
                 rb.AddForce(new Vector2(Random.Range(750, 1500), 0));
             }
             print("Force was added");
+            rb.velocity = Vector3.zero;
         }
     }
 

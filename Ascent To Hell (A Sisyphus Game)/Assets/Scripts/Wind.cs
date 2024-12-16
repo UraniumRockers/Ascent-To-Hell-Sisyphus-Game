@@ -50,6 +50,11 @@ public class Wind : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PlayerGame2D.didPlayerFail)
+        {
+            WindSpawner.windCount--;
+            Destroy(gameObject);
+        }
 
         if (gameObject.transform.eulerAngles.y == 180)
         {

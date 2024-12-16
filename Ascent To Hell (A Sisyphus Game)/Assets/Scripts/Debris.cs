@@ -35,7 +35,7 @@ public class Debris : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, targetPoint, speed * Time.deltaTime);
         transform.Rotate(new Vector3(0, 0, -.5f));
 
-        if (transform.position.y <= -6)
+        if (transform.position.y <= -6 || PlayerGame2D.didPlayerFail)
         {
             DebrisSpawner.debrisCount--;
             Destroy(gameObject);
