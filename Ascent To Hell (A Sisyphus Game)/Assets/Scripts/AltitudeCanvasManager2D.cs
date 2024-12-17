@@ -24,7 +24,7 @@ public class AltitudeCanvasManager2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Time.time - initialTime >= waitTime && !PlayerGame2D.didPlayerFail)
+        if (Time.time - initialTime >= waitTime && !PlayerGame2D.didPlayerFail && !PlayerGame2D.didPlayerWin)
         {
             //print("Altitude Increase");
             altitudeText.text = $"Altitude: {altitude}m";

@@ -17,6 +17,10 @@ public class LoadingScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        elapsedTime = 0;
+        oldTime = 0;
+        
+
         canvases = GameObject.Find("Canvases");        
         image = GetComponentInChildren<Image>();
         color = image.color;
@@ -33,6 +37,8 @@ public class LoadingScreen : MonoBehaviour
             canvases.SetActive(false);
         }
         elapsedTime = Time.time - oldTime;
+        print(elapsedTime.ToString());
+        print($"i: {i}");
         if (i < 255)
         {
             image.color = new Color(image.color.r, image.color.g, image.color.b, i * Time.deltaTime);

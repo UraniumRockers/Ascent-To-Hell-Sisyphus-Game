@@ -41,7 +41,7 @@ public class DebrisSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!PlayerGame2D.didPlayerFail)
+        if (!PlayerGame2D.didPlayerFail && !PlayerGame2D.didPlayerWin)
         {
             RandomTimeSpawn();
         }

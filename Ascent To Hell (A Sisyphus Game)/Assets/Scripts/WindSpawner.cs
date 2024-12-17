@@ -35,7 +35,7 @@ public class WindSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (windCount == 0 && gameObject.name == "Wind Spawner" && !PlayerGame2D.didPlayerFail)
+        if (windCount == 0 && gameObject.name == "Wind Spawner" && !PlayerGame2D.didPlayerFail && !PlayerGame2D.didPlayerWin)
         {
             if (sceneIndex == 5)
             {

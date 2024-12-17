@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerGame2D : MonoBehaviour
 {
     public static bool didPlayerFail = false;
+    public static bool didPlayerWin = false;
 
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float smallScale = 0.8f;
@@ -15,7 +16,7 @@ public class PlayerGame2D : MonoBehaviour
     private int sceneIndex;
     private float maxAlt = 0;
     private float minAlt = -4.99f;
-    private float targetAlt;
+    private int targetAlt;
     private bool hasPlayerFallen = false;
 
 
@@ -24,6 +25,7 @@ public class PlayerGame2D : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         hasPlayerFallen = false;
+        didPlayerWin = false;
         didPlayerFail = false;
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
         ObjectiveManager2DAndBossfight.Change2DObjectiveText("Reach 1000m");
@@ -47,29 +49,25 @@ public class PlayerGame2D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!hasPlayerFallen && HealthManager2DAndBossfight.health == -.5f && AltitudeCanvasManager2D.altitude <= targetAlt)
+        if (!didPlayerWin && !hasPlayerFallen && HealthManager2DAndBossfight.health == -.5f && AltitudeCanvasManager2D.altitude <= targetAlt)
         {
             didPlayerFail = true;
-            GameObject.Find("Sky").GetComponent<Animator>().enabled = false;
-            gameObject.GetComponent<PolygonCollider2D>().enabled = false;
-            gameObject.GetComponent<CircleCollider2D>().enabled = false;
-            //rb.drag = 0f;
-            rb.gravityScale = 1f;
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = 0;
-            rb.angularDrag = 0.05f;
-            rb.drag = 0;
-            rb.freezeRotation = false;
-            //int addedForce = Random.Range(15, 20);
-            //Vector2 force = new Vector2(Random.Range(-750, 1500), Random.Range(750, 1250));
-            Vector2 force = new Vector2(Random.Range(-1000, 1000), Random.Range(-1000, 1000));
-            print($"Force applied: {force}");
-            rb.AddForce(force);
-            //print($"Player force: {addedForce}");
-            hasPlayerFallen = true;
-        }
+            Fall();
 
-        if (!didPlayerFail)
+        }
+        if (didPlayerWin)
+        {
+            if (rb != null)
+            {
+                Fall();
+                Destroy(rb);
+            }
+
+        }
+        
+
+
+        if (!didPlayerFail && !didPlayerWin)
         {
             if (Input.GetKey(KeyCode.W) && transform.position.y <= 0)
             {
@@ -94,9 +92,10 @@ public class PlayerGame2D : MonoBehaviour
             transform.localScale = new Vector2(scale, scale);
         }
 
-        if (HealthManager2DAndBossfight.health == -.5)
+        if (HealthManager2DAndBossfight.health < -.5 && AltitudeCanvasManager2D.altitude > targetAlt && !didPlayerFail)
         {
-            didPlayerFail = true;
+            didPlayerWin = true;
+            AltitudeCanvasManager2D.altitude = targetAlt;
         }
     }
 
@@ -115,6 +114,28 @@ public class PlayerGame2D : MonoBehaviour
             print("Force was added");
             rb.velocity = Vector3.zero;
         }
+    }
+
+
+    private void Fall()
+    {
+        GameObject.Find("Sky").GetComponent<Animator>().enabled = false;
+        gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        //rb.drag = 0f;
+        rb.gravityScale = 1f;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = 0;
+        rb.angularDrag = 0.05f;
+        rb.drag = 0;
+        rb.freezeRotation = false;
+        //int addedForce = Random.Range(15, 20);
+        //Vector2 force = new Vector2(Random.Range(-750, 1500), Random.Range(750, 1250));
+        Vector2 force = new Vector2(Random.Range(-1000, 1000), Random.Range(-1000, 1000));
+        //print($"Force applied: {force}");
+        rb.AddForce(force);
+        //print($"Player force: {addedForce}");
+        hasPlayerFallen = true;
     }
 
 }
