@@ -31,7 +31,7 @@ public class ObjectiveManager2DAndBossfight : MonoBehaviour
             case 2:
             case 5:
             case 10:
-                Change2DObjectiveText("Climb the mountain.");
+                Change2DObjectiveText("Reach 1000m.");
                 break;
 
             // Story 1

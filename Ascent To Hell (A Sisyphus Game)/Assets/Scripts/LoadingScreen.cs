@@ -20,12 +20,14 @@ public class LoadingScreen : MonoBehaviour
         elapsedTime = 0;
         oldTime = 0;
         
-
-        canvases = GameObject.Find("Canvases");        
+        canvases = GameObject.Find("Canvases");
+        gameObject.GetComponent<Canvas>().sortingOrder = 5;
         image = GetComponentInChildren<Image>();
         color = image.color;
         color.a = 0;
         i = 0;
+
+        print("Variables defined");
     }
 
 
@@ -34,20 +36,22 @@ public class LoadingScreen : MonoBehaviour
         if (i == 0)
         {
             oldTime = Time.time;
+            print("Canvases deactivated and oldTime defined");
             canvases.SetActive(false);
         }
         elapsedTime = Time.time - oldTime;
-        print(elapsedTime.ToString());
-        print($"i: {i}");
+        //print(elapsedTime.ToString());
+        //print($"i: {i}");
         if (i < 255)
         {
             image.color = new Color(image.color.r, image.color.g, image.color.b, i * Time.deltaTime);
-            print("This did something");
+            print("Alpha color increased");
         }
         i++;
 
         if (elapsedTime > 5)
         {
+            print("Load new level");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }

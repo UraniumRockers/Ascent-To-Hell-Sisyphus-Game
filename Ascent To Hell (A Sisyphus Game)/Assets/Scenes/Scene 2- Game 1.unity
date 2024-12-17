@@ -1323,6 +1323,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -1.2099609
       objectReference: {fileID: 0}
+    - target: {fileID: 7689263151061252251, guid: 1434bee61030c114191fde2e626f11b2, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7884244059434245194, guid: 1434bee61030c114191fde2e626f11b2, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1527,7 +1531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2e2094d32727e449e41e64dcd5866e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 0
+  waitTime: 0.2
 --- !u!1 &1662393695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2239,5 +2243,5 @@ SceneRoots:
   - {fileID: 1194540769}
   - {fileID: 1040845498}
   - {fileID: 1420034784}
-  - {fileID: 847507088}
   - {fileID: 1474383409}
+  - {fileID: 847507088}

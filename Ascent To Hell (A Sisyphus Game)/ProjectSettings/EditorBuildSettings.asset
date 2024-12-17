@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene 1- Level 1.unity
     guid: 8ef64a3da833d654f859cb5062b98216
   - enabled: 1
-    path: Assets/Scenes/Scene 2- Game 1 (INCOMPLETE).unity
+    path: Assets/Scenes/Scene 2- Game 1.unity
     guid: 49b461239e70b2445870639b5838abf3
   - enabled: 1
     path: Assets/Scenes/Scene 3- Story 1 (INCOMPLETE).unity

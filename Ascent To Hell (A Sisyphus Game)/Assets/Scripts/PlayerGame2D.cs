@@ -23,27 +23,30 @@ public class PlayerGame2D : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        print("Start happens");
         rb = GetComponent<Rigidbody2D>();
         hasPlayerFallen = false;
         didPlayerWin = false;
         didPlayerFail = false;
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        ObjectiveManager2DAndBossfight.Change2DObjectiveText("Reach 1000m");
+        //ObjectiveManager2DAndBossfight.Change2DObjectiveText("Reach 1000m");
         switch (sceneIndex)
         {
             case 2:
-                HealthManager2DAndBossfight.Set1_5Hearts();
+                //HealthManager2DAndBossfight.Set1_5Hearts();
                 targetAlt = 333;
                 break;
             case 5:
-                HealthManager2DAndBossfight.Set2_5Hearts();
+                //HealthManager2DAndBossfight.Set2_5Hearts();
                 targetAlt = 666;
                 break;
             case 8:
-                HealthManager2DAndBossfight.Set3_5Hearts();
+                //HealthManager2DAndBossfight.Set3_5Hearts();
                 targetAlt = 999;
                 break;
         }
+        print($"Target alt: {targetAlt}");
+
     }
 
     // Update is called once per frame
@@ -95,7 +98,12 @@ public class PlayerGame2D : MonoBehaviour
         if (HealthManager2DAndBossfight.health < -.5 && AltitudeCanvasManager2D.altitude > targetAlt && !didPlayerFail)
         {
             didPlayerWin = true;
+            print("game won");
+            print($"healht less than -.5? {HealthManager2DAndBossfight.health < -.5}");
+            print($"Altitude high enough? {AltitudeCanvasManager2D.altitude > targetAlt} and targetAlt is {targetAlt}");
+            print($"didPlayerFail? {didPlayerFail}");
             AltitudeCanvasManager2D.altitude = targetAlt;
+            HealthManager2DAndBossfight.DetermineSetHearts(-.5f);
         }
     }
 

@@ -18,14 +18,30 @@ public class HealthManager2DAndBossfight : MonoBehaviour
         health2DAndBossfight[2] = GameObject.Find("-2.5");
         health2DAndBossfight[3] = GameObject.Find("-3.5");
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        
+        switch (sceneIndex)
+        {
+            case 1:
+            case 4:
+            case 7:
+                Set_5Hearts();
+                break;
+            case 2:
+                Set1_5Hearts();
+                break;
+            case 5:
+                Set2_5Hearts();
+                break;
+            case 8:
+                Set3_5Hearts();
+                break;
+        }
+        
         if (sceneIndex == 1 || sceneIndex == 4 || sceneIndex == 7)
         {
             Set_5Hearts();
         }
-        else if (sceneIndex == 9)
-        {
-            Set3_5Hearts();
-        }
+        
     }
     #endregion
     #region Setting Health Functions
@@ -77,6 +93,9 @@ public class HealthManager2DAndBossfight : MonoBehaviour
     {
         HealthManager2DAndBossfight.health = -2.5f;
         // Activating -2.5
+        print($"Was -2.5 null? {health2DAndBossfight[2] == null}");
+        //GameObject.Find("-2.5").SetActive(true);
+
         health2DAndBossfight[2].SetActive(true);
 
         // Deactivating -.5, -1.5, & -3.5
