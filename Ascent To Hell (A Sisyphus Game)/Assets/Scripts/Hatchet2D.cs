@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Hatchet2D : MonoBehaviour
 {
@@ -32,9 +33,12 @@ public class Hatchet2D : MonoBehaviour
     {
         if (collision.CompareTag("Player") && gameObject.name != "Hatchet Tool")
         {
-            thoughtText.Add("Sick, a hatchet.");
-            thoughtText.Add("Not the best condition, but I'll take it.");
-            ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
+            if (SceneManager.GetActiveScene().buildIndex == 4)
+            {
+                thoughtText.Add("Sick, a hatchet.");
+                thoughtText.Add("Not the best condition, but I'll take it.");
+                ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
+            }
             hatchetTool.SetActive(true);
             GameObject.Find("2D Controls").GetComponent<TMP_Text>().text += "Left Click: Swing Hatchet";
             Destroy(gameObject);

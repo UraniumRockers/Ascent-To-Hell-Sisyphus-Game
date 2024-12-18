@@ -9,6 +9,7 @@ public class Lock : MonoBehaviour
     public static bool canPlayerMove = true;
 
     private GameObject lockCanvas;
+    private GameObject canvas;
     private bool keyDown = false;
     private bool isCompleted = false;
     private List<TMP_Text> dropdownText = new();
@@ -23,6 +24,7 @@ public class Lock : MonoBehaviour
         images.Add(GameObject.Find("Locked Image"));
         images.Add(GameObject.Find("Unlocked Image"));
         lockCanvas = GameObject.Find("Lock Canvas Components");
+        canvas = GameObject.Find("Combination Lock Canvas");
 
         /*for (int i = 0; i < 3; i++)
         {
@@ -72,6 +74,7 @@ public class Lock : MonoBehaviour
         if (collision.CompareTag("Player") && keyDown)
         {
             lockCanvas.SetActive(!lockCanvas.activeSelf);
+            canvas.GetComponent<Canvas>().sortingOrder = (lockCanvas.activeSelf) ? 20 : 0;
             /*for (int i = 0; i < 3; i++) 
             {
                dropdownText[i] = values[i];

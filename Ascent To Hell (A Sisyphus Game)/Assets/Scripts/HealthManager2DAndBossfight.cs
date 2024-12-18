@@ -36,11 +36,10 @@ public class HealthManager2DAndBossfight : MonoBehaviour
                 Set3_5Hearts();
                 break;
         }
-        
-        if (sceneIndex == 1 || sceneIndex == 4 || sceneIndex == 7)
-        {
-            Set_5Hearts();
-        }
+        //if (sceneIndex == 1 || sceneIndex == 4 || sceneIndex == 7)
+        //{
+        //    Set_5Hearts();
+        //}
         
     }
     #endregion

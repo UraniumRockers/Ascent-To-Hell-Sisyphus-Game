@@ -46,12 +46,12 @@ public class DoorRotationScript: MonoBehaviour
             ObjectiveManager2DAndBossfight.Change2DObjectiveText("Find a 3-digit combination.");
             hasPlayerThought = true;
         }
-        else
-        {
-            thoughtText.Clear();
-            thoughtText.Add("I need a 3 digit password.");
-            ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
-        }
+        //else
+        //{
+        //    thoughtText.Clear();
+        //    thoughtText.Add("I need a 3 digit password.");
+        //    ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
+        //}
 
     }
     #endregion

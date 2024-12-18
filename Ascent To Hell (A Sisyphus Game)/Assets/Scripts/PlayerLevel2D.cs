@@ -33,12 +33,7 @@ public class PlayerLevel2D : MonoBehaviour
                 break;
             case 7:
                 thoughtBarText.Add("...I remember that bat... why was I holding it? What would I have done with it in an alleyway...");
-                thoughtBarText.Add("And am I in a loop or some crap? I really don't wanna do all that again...");
-                ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
-                break;
-            case 9:
-                thoughtBarText.Add("Okay. What the hell. Was that... me? Did I fight myself?");
-                thoughtBarText.Add("And what was... I?... talking about? What crime? Is that related to the bat?");
+                thoughtBarText.Add("And am I in a loop or some crap? I really don't wanna do all that again.");
                 thoughtBarText.Add("I hope I wake up from whatever this is soon...");
                 ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
                 break;

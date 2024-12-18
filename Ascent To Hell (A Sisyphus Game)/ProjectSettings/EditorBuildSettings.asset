@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene 4- Level 2.unity
     guid: 1406c438850f6b243a8131f476a2bfc1
   - enabled: 1
-    path: Assets/Scenes/Scene 5- Game 2 (INCOMPLETE).unity
+    path: Assets/Scenes/Scene 5- Game 2.unity
     guid: 5f8f79a59161fb545b68228b699d3cb5
   - enabled: 1
     path: Assets/Scenes/Scene 6- Story 2 (INCOMPLETE).unity
@@ -39,7 +39,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene 9- Level 3 Post-Fight (INCOMPLETE).unity
     guid: 1e99f70c8c7dcdf46ad1f9437d9330b7
   - enabled: 1
-    path: Assets/Scenes/Scene 8- Game 3 (INCOMPLETE).unity
+    path: Assets/Scenes/Scene 8- Game 3.unity
     guid: 861ffb7b8ff36ec4a8b2771c671799e6
   - enabled: 1
     path: Assets/Scenes/Scene 9- Story 3 (INCOMPLETE).unity

@@ -48,7 +48,7 @@ public class PressurePlate : MonoBehaviour
                 thoughtText.Add("I got this.");
                 ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
                 break;
-            case 9:
+            case 7:
                 thoughtText.Add("Maybe it won't be so bad this time...?");
                 thoughtText.Add("*sigh*");
                 ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);

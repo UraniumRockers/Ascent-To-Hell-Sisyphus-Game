@@ -30,7 +30,7 @@ public class ObjectiveManager2DAndBossfight : MonoBehaviour
             // Minigames
             case 2:
             case 5:
-            case 10:
+            case 8:
                 Change2DObjectiveText("Reach 1000m.");
                 break;
 
@@ -44,14 +44,14 @@ public class ObjectiveManager2DAndBossfight : MonoBehaviour
                 Change2DObjectiveText("Drop it.");
                 break;
             // Story 3
-            case 11:
+            case 9:
                 Change2DObjectiveText("What have you done...");
                 break;
             // Bossfight
-            case 8:
-                Change2DObjectiveText("Persevere.");
-                break;
-                #endregion
+            //case 8:
+            //  Change2DObjectiveText("Persevere.");
+            //  break;
+            #endregion
         }
     }
 

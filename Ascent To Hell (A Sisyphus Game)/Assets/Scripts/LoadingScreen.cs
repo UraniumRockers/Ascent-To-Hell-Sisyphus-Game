@@ -13,15 +13,17 @@ public class LoadingScreen : MonoBehaviour
     private static GameObject canvases;
     private static float elapsedTime;
     private static float oldTime;
+    private static GameObject screen;
 
     // Start is called before the first frame update
     void Start()
     {
         elapsedTime = 0;
         oldTime = 0;
+        screen = gameObject;
+        screen.GetComponent<Canvas>().sortingOrder = 0;
         
         canvases = GameObject.Find("Canvases");
-        gameObject.GetComponent<Canvas>().sortingOrder = 5;
         image = GetComponentInChildren<Image>();
         color = image.color;
         color.a = 0;
@@ -33,6 +35,11 @@ public class LoadingScreen : MonoBehaviour
 
     public static void LoadScreen()
     {
+        if (screen.GetComponent<Canvas>().sortingOrder != 5)
+        {
+            screen.GetComponent<Canvas>().sortingOrder = 5;
+        }
+
         if (i == 0)
         {
             oldTime = Time.time;
