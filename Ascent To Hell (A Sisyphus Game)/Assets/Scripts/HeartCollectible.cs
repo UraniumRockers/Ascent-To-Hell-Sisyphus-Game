@@ -65,6 +65,27 @@ public class HeartCollectible : MonoBehaviour
                     redCloudLeft.GetComponent<SpriteRenderer>().enabled = true;
                 }
             }
+
+            else if (sceneIndex == 7)
+            {
+                if (gameObject.transform.position.x <= -35)
+                {
+                    ObjectiveManager2DAndBossfight.Change2DObjectiveText("Go to the pressure plate.");
+                    PlayerLevel2D.isPlayerPrepared = true;
+                }
+                else if (gameObject.transform.position.y <= -20)
+                {
+                    ObjectiveManager2DAndBossfight.Change2DObjectiveText("Continue exploring.");
+                    redCloudLeft.GetComponents<BoxCollider2D>()[0].enabled = false;
+                    redCloudLeft.GetComponents<BoxCollider2D>()[1].enabled = true;
+                    redCloudLeft.GetComponent<SpriteRenderer>().enabled = true;
+                }
+                else
+                {
+
+                }
+            }
+
             Destroy(gameObject);
         }
     }

@@ -17,6 +17,7 @@ public class ThoughtCanvasManager2D : MonoBehaviour
     {
         // Defining variables and deactivating variables
         thoughtBar = GameObject.Find("Thought Bar");
+        print($"Thought bar was found: {thoughtBar != null}");
         thoughtText = thoughtBar.GetComponentInChildren<TMP_Text>();
         thoughtBar.SetActive(false);
         isEPressed = false;
@@ -89,7 +90,9 @@ public class ThoughtCanvasManager2D : MonoBehaviour
         //thoughtBar.SetActive(true);
         if (thoughtCanvas != null)
         {
-            ThoughtCanvasManager2D.thoughtBar.SetActive(true);
+            print($"Thought bar was found: {thoughtBar != null}");
+
+            thoughtBar.SetActive(true);
             thoughtCanvas.StartCoroutine(thoughtCanvas.GenerateTimedText(text));
         }
     }

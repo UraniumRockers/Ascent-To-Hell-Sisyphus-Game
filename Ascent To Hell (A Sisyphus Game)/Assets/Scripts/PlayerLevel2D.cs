@@ -12,9 +12,11 @@ public class PlayerLevel2D : MonoBehaviour
     private int sceneIndex;                                               // Scene Index
     private List<string> thoughtBarText = new();                          // List of stuff to say in timed text
     private bool canPlayerThinkBoutPressurePlate = true;                  // I ain't commenting this one 
+    private bool hasPlayerInitiallyThought = false;
 
     private void Start()
     {
+        hasPlayerInitiallyThought = false;
         sceneIndex = SceneManager.GetActiveScene().buildIndex; // Get scene index
         // MAKE THESE ARGUMENTS ARRAYS BY MAKING A VARIABLE IN THE BEGINNGING AND SETTING IT TO THAT
         #region Initial Timed Text (2D)
@@ -24,19 +26,22 @@ public class PlayerLevel2D : MonoBehaviour
                 thoughtBarText.Add("Where... am I? What is this place?");
                 thoughtBarText.Add("There's literally nothing here. Except for that tablet...");
                 ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
+                hasPlayerInitiallyThought = true;
                 break;
             case 4:
                 thoughtBarText.Add("Here again? And what the hell was that? Is this a nightmare or something?");
                 thoughtBarText.Add("I hate this. Anyways...");
                 thoughtBarText.Add("Do I have to do all of that stuff again? *sigh*");
                 ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
+                hasPlayerInitiallyThought = true;
                 break;
-            case 7:
+            /*case 7:
                 thoughtBarText.Add("...I remember that bat... why was I holding it? What would I have done with it in an alleyway...");
                 thoughtBarText.Add("And am I in a loop or some crap? I really don't wanna do all that again.");
                 thoughtBarText.Add("I hope I wake up from whatever this is soon...");
                 ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
-                break;
+                hasPlayerInitiallyThought = true;
+                break;*/
         }
         #endregion
     }
@@ -44,6 +49,17 @@ public class PlayerLevel2D : MonoBehaviour
 
     void Update()
     {
+        #region might fix bug with level 3 thought text
+        if (sceneIndex == 7 && !hasPlayerInitiallyThought)
+        {
+            thoughtBarText.Add("...I remember that bat... why was I holding it? What would I have done with it in an alleyway...");
+            thoughtBarText.Add("And am I in a loop or some crap? I really don't wanna do all that again.");
+            thoughtBarText.Add("I hope I wake up from whatever this is soon...");
+            ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
+            hasPlayerInitiallyThought = true;
+        }
+        #endregion
+
         #region Movement
         if (LevelBoulder.canPlayerMove && ThoughtCanvasManager2D.canPlayerMove && PressurePlate.canPlayerMove && Tablet.canPlayerMove && Lock.canPlayerMove && DoorRotationScript.canPlayerMove)
         {

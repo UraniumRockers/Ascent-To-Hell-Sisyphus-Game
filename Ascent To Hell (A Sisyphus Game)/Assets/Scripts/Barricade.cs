@@ -66,9 +66,12 @@ public class Barricade : MonoBehaviour
         if (collision.CompareTag("Player") && !hasPlayerEnteredForFirstTime)
         {
             ObjectiveManager2DAndBossfight.Change2DObjectiveText("Take down the barricade.");
-            thoughtText.Add("I definitely can't get passed that.");
-            thoughtText.Add("If I can find something to tear it down...");
-            ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
+            if (SceneManager.GetActiveScene().buildIndex == 4) 
+            {
+                thoughtText.Add("I definitely can't get passed that.");
+                thoughtText.Add("If I can find something to tear it down...");
+                ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
+            }
             hasPlayerEnteredForFirstTime = true;
             gameObject.GetComponents<BoxCollider2D>()[0].enabled = false;
         }
