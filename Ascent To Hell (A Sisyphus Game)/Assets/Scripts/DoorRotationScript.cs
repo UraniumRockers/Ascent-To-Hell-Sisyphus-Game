@@ -23,29 +23,33 @@ public class DoorRotationScript: MonoBehaviour
     #region Timed Thought Text
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Only thinks for the first time
-        if (!hasPlayerThought)
+        if (collision.CompareTag("Player"))
         {
-            // Determines thinking text
-            switch (sceneIndex)
+            // Only thinks for the first time
+            if (!hasPlayerThought)
             {
-                case 1:
-                    thoughtText.Add("Really? A locked door? Man...");
-                    thoughtText.Add("Looks like a combination lock with 3 numbers...");
-                    ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
-                    break;
-                case 4:
-                    thoughtText.Add("I guess this is still here. At least I know what to do.");
-                    ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
-                    break;
-                case 7:
-                    thoughtText.Add("*sigh*");
-                    ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
-                    break;
+                // Determines thinking text
+                switch (sceneIndex)
+                {
+                    case 1:
+                        thoughtText.Add("Really? A locked door? Man...");
+                        thoughtText.Add("Looks like a combination lock with 3 numbers...");
+                        ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
+                        break;
+                    case 4:
+                        thoughtText.Add("I guess this is still here. At least I know what to do.");
+                        ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
+                        break;
+                    case 7:
+                        thoughtText.Add("*sigh*");
+                        ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
+                        break;
+                }
+                ObjectiveManager2DAndBossfight.Change2DObjectiveText("Find a 3-digit combination.");
+                hasPlayerThought = true;
             }
-            ObjectiveManager2DAndBossfight.Change2DObjectiveText("Find a 3-digit combination.");
-            hasPlayerThought = true;
         }
+        
         //else
         //{
         //    thoughtText.Clear();

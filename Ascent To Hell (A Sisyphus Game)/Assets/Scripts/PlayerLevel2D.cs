@@ -160,7 +160,17 @@ public class PlayerLevel2D : MonoBehaviour
                             transform.position = new Vector2(transform.position.x, transform.position.y - 0.1f);
                             thoughtBarText.Add("Am I in the right place?");
                             thoughtBarText.Add("This place is too empty...");
+
+
                             ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
+                            ObjectiveManager2DAndBossfight.Change2DObjectiveText("Find pressure plate.");
+                            GameObject redCloudRight = GameObject.Find("Red Cloud (Right)");
+                            if (!redCloudRight.GetComponent<SpriteRenderer>().enabled)
+                            {
+                                redCloudRight.GetComponents<BoxCollider2D>()[0].enabled = false;
+                                redCloudRight.GetComponents<BoxCollider2D>()[1].enabled = true;
+                                redCloudRight.GetComponent<SpriteRenderer>().enabled = true;
+                            }
                             canPlayerThinkBoutPressurePlate = false;
                             break;
                     }
