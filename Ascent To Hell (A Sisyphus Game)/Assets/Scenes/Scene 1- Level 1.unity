@@ -7944,36 +7944,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2138025763}
     m_Modifications:
-    - target: {fileID: 35474947021422713, guid: 7a5550d66f4b19147b4464712a3ebcbf, type: 3}
-      propertyPath: m_text
-      value: 'W: Up
-
-        A: Left
-
-        S: Down
-
-        D: Right
-
-        E:
-        Interact
-
-'
-      objectReference: {fileID: 0}
     - target: {fileID: 275896251021881965, guid: 7a5550d66f4b19147b4464712a3ebcbf, type: 3}
       propertyPath: m_Name
       value: UI Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 275896251021881965, guid: 7a5550d66f4b19147b4464712a3ebcbf, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 276039305895084024, guid: 7a5550d66f4b19147b4464712a3ebcbf, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 193.9021
-      objectReference: {fileID: 0}
-    - target: {fileID: 276039305895084024, guid: 7a5550d66f4b19147b4464712a3ebcbf, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -43.392975
       objectReference: {fileID: 0}
     - target: {fileID: 6585949569328735530, guid: 7a5550d66f4b19147b4464712a3ebcbf, type: 3}
       propertyPath: m_Pivot.x
@@ -8054,10 +8027,6 @@ PrefabInstance:
     - target: {fileID: 6585949569328735530, guid: 7a5550d66f4b19147b4464712a3ebcbf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7614079600678486114, guid: 7a5550d66f4b19147b4464712a3ebcbf, type: 3}
-      propertyPath: m_Name
-      value: 2D Controls
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8307,6 +8276,7 @@ GameObject:
   - component: {fileID: 9100963185959140113}
   - component: {fileID: 1417053891711151046}
   - component: {fileID: 6978596628219875679}
+  - component: {fileID: 9100963185959140114}
   m_Layer: 0
   m_Name: Player Level 2D
   m_TagString: Player
@@ -8896,8 +8866,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_LinearDrag: 1000000
+  m_AngularDrag: 1000000
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -9233,6 +9203,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+--- !u!114 &9100963185959140114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998876231776876476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6f18d5da2db2c4ea7dbb87c0920190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pebble: {fileID: 346940954883673533, guid: 6830c8ba6e5ddb44cb3f80112689e15b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
