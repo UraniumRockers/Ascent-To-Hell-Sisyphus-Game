@@ -82,7 +82,13 @@ public class HeartCollectible : MonoBehaviour
                 }
                 else
                 {
-
+                    ObjectiveManager2DAndBossfight.Change2DObjectiveText("Persevere.");
+                    List<string> thoughtText = new()
+                    {
+                        "Another one...",
+                        "Yay..."
+                    };
+                    ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
                 }
             }
 

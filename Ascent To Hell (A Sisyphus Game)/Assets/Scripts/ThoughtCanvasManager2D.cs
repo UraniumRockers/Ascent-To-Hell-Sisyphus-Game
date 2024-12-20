@@ -47,11 +47,10 @@ public class ThoughtCanvasManager2D : MonoBehaviour
         }
         */
     }
-    
+
     #endregion
 
     #region Timed Text Code
-
     // Coroutine that creates timed text
     private IEnumerator GenerateTimedText(List<string> text)
     {

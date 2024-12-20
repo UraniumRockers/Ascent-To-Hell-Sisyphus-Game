@@ -165,11 +165,13 @@ public class PlayerLevel2D : MonoBehaviour
                             ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
                             ObjectiveManager2DAndBossfight.Change2DObjectiveText("Find pressure plate.");
                             GameObject redCloudRight = GameObject.Find("Red Cloud (Right)");
+                            print($"Is red cloud visible? {redCloudRight.GetComponent<SpriteRenderer>().enabled}");
                             if (!redCloudRight.GetComponent<SpriteRenderer>().enabled)
                             {
                                 redCloudRight.GetComponents<BoxCollider2D>()[0].enabled = false;
                                 redCloudRight.GetComponents<BoxCollider2D>()[1].enabled = true;
                                 redCloudRight.GetComponent<SpriteRenderer>().enabled = true;
+                                print("Cloud active and stuff");
                             }
                             canPlayerThinkBoutPressurePlate = false;
                             break;

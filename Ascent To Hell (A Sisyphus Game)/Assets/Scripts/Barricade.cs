@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -40,6 +41,7 @@ public class Barricade : MonoBehaviour
                 barricades[1].SetActive(false);
                 barricades[2].SetActive(true);
                 gameObject.GetComponents<BoxCollider2D>()[1].enabled = false;
+                GameObject.Find("2D Controls").GetComponent<TMP_Text>().text = "W: Up\nA: Left\nS: Down\nD: Right\nE: Interact\nSpace: Throw Pebble";
 
                 if (!hasObjectiveTextBeenChanged)
                 {
