@@ -330,10 +330,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2911632675801865409, guid: 1434bee61030c114191fde2e626f11b2, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -1.2099609
-      objectReference: {fileID: 0}
     - target: {fileID: 7884244059434245194, guid: 1434bee61030c114191fde2e626f11b2, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -705,6 +701,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1115750235459080654, guid: 7a5550d66f4b19147b4464712a3ebcbf, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 032481f191d9547f28877c53289d7b7a, type: 3}
     - target: {fileID: 1906791834690719981, guid: 7a5550d66f4b19147b4464712a3ebcbf, type: 3}
       propertyPath: m_IsActive
       value: 1
