@@ -11,7 +11,7 @@ public class HeartCollectible : MonoBehaviour
     private float health;
     private int sceneIndex;
     private GameObject redCloudLeft;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -89,6 +89,7 @@ public class HeartCollectible : MonoBehaviour
                         "Yay..."
                     };
                     ThoughtCanvasManager2D.SetThoughtBarText(thoughtText);
+                    GameObject.Find("Right Origin").GetComponent<BoxCollider2D>().enabled = false;
                 }
             }
 
