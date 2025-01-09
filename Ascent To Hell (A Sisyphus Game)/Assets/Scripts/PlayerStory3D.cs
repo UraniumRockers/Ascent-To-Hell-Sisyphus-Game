@@ -38,11 +38,11 @@ public class PlayerStory3D : MonoBehaviour
     {
         if (canPlayerMove)
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) && transform.position.z <= 11.5)
             {
                 transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
             }
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.S) && transform.position.z >= -11)
             {
                 transform.Translate(new Vector3(0, 0, -speed * Time.deltaTime));
             }
@@ -50,8 +50,16 @@ public class PlayerStory3D : MonoBehaviour
 
         if (transform.position.z >= 11.5)
         {
-           // Do the policeman jumpscare
-           // Sigma
+            GameObject cop = GameObject.Find("Cop With Baton Anim");
+            if (cop.transform.position.x > 0)
+            {
+                cop.transform.Translate(new Vector3(.01f, 0, 0));
+            }
+            else
+            {
+                canPlayerMove = false;
+            }
+            GameObject.Find("Cop With Baton Anim").GetComponent<Animator>().Play("CopAttack");
         }
     }
 }
