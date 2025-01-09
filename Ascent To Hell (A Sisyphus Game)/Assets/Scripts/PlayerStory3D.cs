@@ -9,6 +9,7 @@ public class PlayerStory3D : MonoBehaviour
     public static bool canPlayerMove;
 
     [SerializeField] private float speed;
+    [SerializeField] private Animation copAttack;
     private int sceneIndex;
 
     // Start is called before the first frame update
@@ -51,15 +52,16 @@ public class PlayerStory3D : MonoBehaviour
         if (transform.position.z >= 11.5)
         {
             GameObject cop = GameObject.Find("Cop With Baton Anim");
-            if (cop.transform.position.x > 0)
+            if (cop.transform.position.z > 13.5)
             {
-                cop.transform.Translate(new Vector3(.01f, 0, 0));
+                canPlayerMove = false;
+                cop.transform.Translate(new Vector3(0, 0, 0.5f));
             }
             else
             {
-                canPlayerMove = false;
+                cop.transform.position = new Vector3(0, -.8f, 13.5f);
+                cop.GetComponent<Animator>().Play("CopAttack");
             }
-            GameObject.Find("Cop With Baton Anim").GetComponent<Animator>().Play("CopAttack");
         }
     }
 }
