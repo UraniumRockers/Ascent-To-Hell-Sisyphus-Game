@@ -64352,4 +64352,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 1.5
+    functionName: CopAttackOver
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: dcd9710159137f14b96a83b7601d9a9b, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

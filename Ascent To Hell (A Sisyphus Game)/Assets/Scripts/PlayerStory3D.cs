@@ -8,6 +8,8 @@ public class PlayerStory3D : MonoBehaviour
 {
     public static bool canPlayerMove;
 
+    private static bool isCopAttackOver = false;
+
     [SerializeField] private float speed;
     [SerializeField] private Animation copAttack;
     private int sceneIndex;
@@ -15,6 +17,7 @@ public class PlayerStory3D : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isCopAttackOver = false;
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
         
         switch (sceneIndex)
@@ -62,6 +65,15 @@ public class PlayerStory3D : MonoBehaviour
                 cop.transform.position = new Vector3(0, -.8f, 13.5f);
                 cop.GetComponent<Animator>().Play("CopAttack");
             }
+            if (isCopAttackOver)
+            {
+                print("done");
+            }
         }
+    }
+
+    public void CopAttackOver()
+    {
+        isCopAttackOver = true;
     }
 }
