@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/1- (INCOMPLETE) Menu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Scene 0- Main Menu (INCOMPLETE).unity
+    path: Assets/Scenes/Scene 0- Main Menu.unity
     guid: c1e5bf0c2ed281b4ab6803faae953610
   - enabled: 1
     path: Assets/Scenes/Scene 1- Level 1.unity

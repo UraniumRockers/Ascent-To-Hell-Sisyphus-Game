@@ -29,6 +29,8 @@ public class PressurePlate : MonoBehaviour
             animator.enabled = true; 
             animator.Play("Boulder Roll Down");
             hasStuffHappenedAlready = true;
+            GameObject.Find("Player Level 2D").GetComponents<AudioSource>()[4].Play();
+            print("Boulder Sound Plays");
         }
     }
 

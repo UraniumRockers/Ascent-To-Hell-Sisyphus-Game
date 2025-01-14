@@ -86,6 +86,8 @@ public class Lock : MonoBehaviour
                 ObjectiveManager2DAndBossfight.Change2DObjectiveText("Continue down the tunnel");
                 gameObject.SetActive(false);
                 DoorRotationScript.OpenDoor();
+                GameObject.Find("Player Level 2D").GetComponents<AudioSource>()[2].Play();
+                print("door opening sound plays");
                 //print("Door should open");
                 canPlayerMove = true;
             }

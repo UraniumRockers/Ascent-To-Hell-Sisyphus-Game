@@ -9,15 +9,29 @@ public class PlayerLevel2D : MonoBehaviour
     public static bool isPlayerPrepared = false;                          // Is player ready to move on to boulder area?
 
     [SerializeField] private float speed;                                 // Movement speed
+    //[SerializeField] private AudioClip[] audioClips;
+    private AudioSource[] audioSources;
     private int sceneIndex;                                               // Scene Index
     private List<string> thoughtBarText = new();                          // List of stuff to say in timed text
     private bool canPlayerThinkBoutPressurePlate = true;                  // I ain't commenting this one 
     private bool hasPlayerInitiallyThought = false;
+    
 
     private void Start()
     {
         hasPlayerInitiallyThought = false;
         sceneIndex = SceneManager.GetActiveScene().buildIndex; // Get scene index
+
+        audioSources = gameObject.GetComponents<AudioSource>();
+
+        audioSources[0].volume = MainMenu.volumeScale;
+        audioSources[1].volume = MainMenu.volumeScale;
+        audioSources[2].volume = MainMenu.volumeScale;
+        audioSources[3].volume = MainMenu.volumeScale;
+        audioSources[4].volume = MainMenu.volumeScale;
+        audioSources[5].volume = MainMenu.volumeScale;
+        audioSources[0].Play();
+        print("wind sounds play");
         // MAKE THESE ARGUMENTS ARRAYS BY MAKING A VARIABLE IN THE BEGINNGING AND SETTING IT TO THAT
         #region Initial Timed Text (2D)
         switch (sceneIndex)
@@ -49,6 +63,13 @@ public class PlayerLevel2D : MonoBehaviour
 
     void Update()
     {
+        print(!audioSources[0].isPlaying);
+        if (!audioSources[0].isPlaying)
+        {
+            audioSources[0].Play();
+            print("wind sounds play");
+        }
+
         #region might fix bug with level 3 thought text
         if (sceneIndex == 7 && !hasPlayerInitiallyThought)
         {
@@ -65,6 +86,7 @@ public class PlayerLevel2D : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.W))
             {
+                if (!audioSources[1].isPlaying) { audioSources[1].Play(); print("walking sound playing"); }
                 if (Input.GetKey(KeyCode.D))
                 {
                     transform.position += speed * Time.deltaTime * new Vector3(1, 1, 0);
@@ -83,6 +105,7 @@ public class PlayerLevel2D : MonoBehaviour
             }
             else if (Input.GetKey(KeyCode.S))
             {
+                if (!audioSources[1].isPlaying) { audioSources[1].Play(); print("walking sound playing"); }
                 if (Input.GetKey(KeyCode.D))
                 {
                     transform.position += speed * Time.deltaTime * new Vector3(1, -1, 0);
@@ -103,11 +126,15 @@ public class PlayerLevel2D : MonoBehaviour
             {
                 transform.position += speed * Time.deltaTime * Vector3.right;
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.forward * -90), 200f);
+                if (!audioSources[1].isPlaying) { audioSources[1].Play(); print("walking sound playing"); }
+
             }
             else if (Input.GetKey(KeyCode.A))
             {
                 transform.position += speed * Time.deltaTime * Vector3.left;
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.forward * 90), 200f);
+                if (!audioSources[1].isPlaying) { audioSources[1].Play(); print("walking sound playing"); }
+
             }
         }
         #endregion

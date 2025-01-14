@@ -84,6 +84,8 @@ public class Barricade : MonoBehaviour
         {
             swingCounter++;
             Hatchet2D.isSwinging = false;
+            GameObject.Find("Player Level 2D").GetComponents<AudioSource>()[5].Play();
+            print("wood cut sound plays");
         }
     }
 }

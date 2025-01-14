@@ -171,7 +171,9 @@ public class PlayerStory3D : MonoBehaviour
         hasRedScreenFinished = true;
         if (SceneManager.GetActiveScene().buildIndex == 9)
         {
+            #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
+            #endif
             Application.Quit();
         }
         else
