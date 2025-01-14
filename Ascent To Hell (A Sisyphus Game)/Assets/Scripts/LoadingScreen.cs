@@ -23,7 +23,8 @@ public class LoadingScreen : MonoBehaviour
         screen = gameObject;
         screen.GetComponent<Canvas>().sortingOrder = 0;
         
-        canvases = GameObject.Find("Canvases");
+            canvases = GameObject.Find("Canvases");
+
         image = GetComponentInChildren<Image>();
         color = image.color;
         color.a = 0;

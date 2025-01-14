@@ -19,6 +19,7 @@ public class PlayerStory3D : MonoBehaviour
     [SerializeField] private GameObject health0;
     [SerializeField] private GameObject health1;
     private int sceneIndex;
+    private GameObject bat;
     private float playerRotationX;
     private bool hasAnimStarted;
     private bool shouldPlayerLookBack;
@@ -30,7 +31,6 @@ public class PlayerStory3D : MonoBehaviour
     void Start()
     {
         print(transform.rotation.y);
-        GameObject.Find("Baseball Bat").GetComponent<Rigidbody>().useGravity = false;
         //print("Gravity is false");
 
         if (gameObject.name == "Player")
@@ -42,7 +42,6 @@ public class PlayerStory3D : MonoBehaviour
             playerRotationX = transform.rotation.x;
             isPlayerHoldingBat = false;
             shouldPlayerLookBack = false;
-            hasPlayerTurnedBack = false;
 
             switch (sceneIndex)
             {
@@ -54,11 +53,17 @@ public class PlayerStory3D : MonoBehaviour
                     ObjectiveManager3D.SetObjectiveText("Drop it.");
                     canPlayerMove = false;
                     isPlayerHoldingBat = true;
+                    bat = GameObject.Find("Baseball Bat");
+                    GameObject.Find("Baseball Bat").GetComponent<Rigidbody>().useGravity = false;
+
                     break;
                 case 9:
                     ObjectiveManager3D.SetObjectiveText("What have you done...");
                     canPlayerMove = false;
                     shouldPlayerLookBack = true;
+                    bat = GameObject.Find("Baseball Bat");
+                    GameObject.Find("Baseball Bat").GetComponent<Rigidbody>().useGravity = false;
+
                     break;
             }
         }
@@ -72,31 +77,44 @@ public class PlayerStory3D : MonoBehaviour
         {
             if (canPlayerMove)
             {
+                print("this is working");
                 if (Input.GetKey(KeyCode.W) && transform.position.z <= 11.5)
                 {
+                    print("move forward");
+                    //transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.2f);
                     transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
                 }
-                if (Input.GetKey(KeyCode.S) && transform.position.z >= -8.468307)
+                if (Input.GetKey(KeyCode.S) && transform.position.z >= -8.568307)
                 {
+                    print("move back");
+                    //transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 0.2f);
                     transform.Translate(new Vector3(0, 0, -speed * Time.deltaTime));
                 }
             }
             if (shouldPlayerLookBack)
             {
-
-                
+                GetComponent<Animator>().Play("3D Player");
             }
 
 
             if (isPlayerHoldingBat)
             {
+                ObjectiveManager3D.SetObjectiveText("Drop it.");
                 if (Input.GetKeyDown(KeyCode.G))
                 {
                     //print("Gravity is true");
+                    print("before bat drop");
                     GameObject.Find("Baseball Bat").GetComponent<Rigidbody>().useGravity = true;
+                    print("after bat drop");
                     canPlayerMove = true;
+                    print(canPlayerMove);
                     ObjectiveManager3D.SetObjectiveText("Get out of here.");
+                    isPlayerHoldingBat = false;
                 }
+            }
+            if (bat != null && bat.transform.position.y <= -5)
+            {
+                Destroy(bat);
             }
 
             if (transform.position.z >= 11.5)
@@ -151,7 +169,22 @@ public class PlayerStory3D : MonoBehaviour
     {
         //print("this ran");
         hasRedScreenFinished = true;
-        SceneManager.LoadScene(4);
+        if (SceneManager.GetActiveScene().buildIndex == 9)
+        {
+            UnityEditor.EditorApplication.isPlaying = false;
+            Application.Quit();
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
+
+    public void PlayerFinishedTurning()
+    {
+        shouldPlayerLookBack = false;
+        isPlayerHoldingBat = true;
+        GameObject.Find("Player").GetComponent<Animator>().enabled = false;
     }
 
 }
