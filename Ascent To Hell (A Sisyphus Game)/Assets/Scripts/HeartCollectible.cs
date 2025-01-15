@@ -32,7 +32,7 @@ public class HeartCollectible : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.gameObject.GetComponents<AudioSource>()[3].Play();
-            print("heart made noise");
+            //print("heart made noise");
             HealthManager2DAndBossfight.DetermineSetHearts(health - 1);
             if (sceneIndex == 1)
             {

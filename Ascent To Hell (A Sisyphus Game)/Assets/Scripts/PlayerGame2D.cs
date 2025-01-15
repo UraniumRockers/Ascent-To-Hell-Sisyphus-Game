@@ -18,11 +18,18 @@ public class PlayerGame2D : MonoBehaviour
     private float minAlt = -4.99f;
     private int targetAlt;
     private bool hasPlayerFallen = false;
+    private AudioSource[] audioSources;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSources = GetComponents<AudioSource>();
+        audioSources[0].volume = MainMenu.volumeScale; // Climbing Tune
+        audioSources[1].volume = MainMenu.volumeScale; // Death Sound
+        audioSources[2].volume = MainMenu.volumeScale; // Hit Sound
+        audioSources[3].volume = MainMenu.volumeScale; // Wind Ambiance
+
         print("Start happens");
         rb = GetComponent<Rigidbody2D>();
         hasPlayerFallen = false;
@@ -55,6 +62,9 @@ public class PlayerGame2D : MonoBehaviour
         if (!didPlayerWin && !hasPlayerFallen && HealthManager2DAndBossfight.health == -.5f && AltitudeCanvasManager2D.altitude <= targetAlt)
         {
             didPlayerFail = true;
+            audioSources[1].Play();
+            audioSources[0].Stop();
+            audioSources[3].Stop();
             Fall();
 
         }
@@ -63,7 +73,10 @@ public class PlayerGame2D : MonoBehaviour
             if (rb != null)
             {
                 Fall();
-                Destroy(rb);
+                audioSources[2].Play();
+                audioSources[0].Stop();
+                audioSources[3].Stop();
+                Destroy(rb); 
             }
 
         }
@@ -99,7 +112,7 @@ public class PlayerGame2D : MonoBehaviour
         {
             didPlayerWin = true;
             print("game won");
-            print($"healht less than -.5? {HealthManager2DAndBossfight.health < -.5}");
+            print($"health less than -.5? {HealthManager2DAndBossfight.health < -.5}");
             print($"Altitude high enough? {AltitudeCanvasManager2D.altitude > targetAlt} and targetAlt is {targetAlt}");
             print($"didPlayerFail? {didPlayerFail}");
             AltitudeCanvasManager2D.altitude = targetAlt;

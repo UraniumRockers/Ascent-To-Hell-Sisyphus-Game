@@ -24,19 +24,30 @@ public class PlayerLevel2D : MonoBehaviour
 
         audioSources = gameObject.GetComponents<AudioSource>();
 
-        audioSources[0].volume = MainMenu.volumeScale;
+        int numOfAudioSources = 6;
+
+        for (int i = 0; i < numOfAudioSources; i++)
+        {
+            if (audioSources.Length >= i + 1)
+            {
+                audioSources[i].volume = MainMenu.volumeScale;
+            }
+        }
+
+/*        audioSources[0].volume = MainMenu.volumeScale;
         audioSources[1].volume = MainMenu.volumeScale;
         audioSources[2].volume = MainMenu.volumeScale;
         audioSources[3].volume = MainMenu.volumeScale;
         audioSources[4].volume = MainMenu.volumeScale;
-        audioSources[5].volume = MainMenu.volumeScale;
+        audioSources[5].volume = MainMenu.volumeScale;*/
         audioSources[0].Play();
-        print("wind sounds play");
+        //print("wind sounds play");
         // MAKE THESE ARGUMENTS ARRAYS BY MAKING A VARIABLE IN THE BEGINNGING AND SETTING IT TO THAT
         #region Initial Timed Text (2D)
         switch (sceneIndex)
         {
             case 1:
+                print("thjionk dumb bum");
                 thoughtBarText.Add("Where... am I? What is this place?");
                 thoughtBarText.Add("There's literally nothing here. Except for that tablet...");
                 ThoughtCanvasManager2D.SetThoughtBarText(thoughtBarText);
@@ -58,16 +69,17 @@ public class PlayerLevel2D : MonoBehaviour
                 break;*/
         }
         #endregion
+
     }
 
 
     void Update()
     {
-        print(!audioSources[0].isPlaying);
+        //print(!audioSources[0].isPlaying);
         if (!audioSources[0].isPlaying)
         {
             audioSources[0].Play();
-            print("wind sounds play");
+            //print("wind sounds play");
         }
 
         #region might fix bug with level 3 thought text
@@ -82,6 +94,12 @@ public class PlayerLevel2D : MonoBehaviour
         #endregion
 
         #region Movement
+        print(LevelBoulder.canPlayerMove);
+        print(ThoughtCanvasManager2D.canPlayerMove);
+        print(PressurePlate.canPlayerMove);
+        print(Tablet.canPlayerMove);
+        print(Lock.canPlayerMove);
+        print(DoorRotationScript.canPlayerMove);
         if (LevelBoulder.canPlayerMove && ThoughtCanvasManager2D.canPlayerMove && PressurePlate.canPlayerMove && Tablet.canPlayerMove && Lock.canPlayerMove && DoorRotationScript.canPlayerMove)
         {
             if (Input.GetKey(KeyCode.W))
@@ -126,14 +144,14 @@ public class PlayerLevel2D : MonoBehaviour
             {
                 transform.position += speed * Time.deltaTime * Vector3.right;
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.forward * -90), 200f);
-                if (!audioSources[1].isPlaying) { audioSources[1].Play(); print("walking sound playing"); }
+                if (!audioSources[1].isPlaying) { audioSources[1].Play(); /*print("walking sound playing");*/ }
 
             }
             else if (Input.GetKey(KeyCode.A))
             {
                 transform.position += speed * Time.deltaTime * Vector3.left;
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.forward * 90), 200f);
-                if (!audioSources[1].isPlaying) { audioSources[1].Play(); print("walking sound playing"); }
+                if (!audioSources[1].isPlaying) { audioSources[1].Play(); /*print("walking sound playing");*/ }
 
             }
         }

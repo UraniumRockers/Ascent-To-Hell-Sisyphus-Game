@@ -57,6 +57,7 @@ public class Debris : MonoBehaviour
         if (!collided && collision.CompareTag("Boulder"))
         {
             collided = true;
+            GameObject.Find("Player").GetComponents<AudioSource>()[2].Play();
             //print($"Debris Hit {collision.tag}");
             if (HealthManager2DAndBossfight.health != -.5f)
             {

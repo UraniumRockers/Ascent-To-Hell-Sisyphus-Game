@@ -16,7 +16,10 @@ public class LevelBoulder : MonoBehaviour
             loadScreen = true;
         }
     }
-
+    private void Start()
+    {
+        canPlayerMove = true;
+    }
     private void FixedUpdate()
     {
         if (loadScreen)

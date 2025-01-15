@@ -106,6 +106,7 @@ public class Wind : MonoBehaviour
         {
             //print($"Wind Hit {collision.tag}");
             collided = true;
+            GameObject.Find("Player").GetComponents<AudioSource>()[2].Play();
             if (HealthManager2DAndBossfight.health != -.5f)
             {
                 HealthManager2DAndBossfight.DetermineSetHearts(HealthManager2DAndBossfight.health + 1);

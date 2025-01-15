@@ -66,7 +66,7 @@ public class DoorRotationScript: MonoBehaviour
         animator = doorRotationPoint.GetComponent<Animator>();
         doorRotationPoint.GetComponent<BoxCollider2D>().enabled = false;
         animator.enabled = true;
-        animator.Play("Door Rotation Point");
+        animator.Play("Door Rotation");
         canPlayerMove = false;
         //print("Player can't move");
     }

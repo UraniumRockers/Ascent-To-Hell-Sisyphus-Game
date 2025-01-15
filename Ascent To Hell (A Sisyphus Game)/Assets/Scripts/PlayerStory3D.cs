@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -26,15 +27,32 @@ public class PlayerStory3D : MonoBehaviour
     private bool hasRedScreenFinished;
     private bool isPlayerHoldingBat;
     private bool hasPlayerTurnedBack;
+    private AudioSource[] audioSources;
 
     // Start is called before the first frame update
     void Start()
     {
-        print(transform.rotation.y);
+
+
+        //print(transform.rotation.y);
         //print("Gravity is false");
 
         if (gameObject.name == "Player")
         {
+            audioSources = gameObject.GetComponents<AudioSource>();
+            audioSources[0].volume = MainMenu.volumeScale;
+            audioSources[1].volume = MainMenu.volumeScale;
+            audioSources[2].volume = MainMenu.volumeScale;
+
+            if (audioSources.Length >= 4)
+            {
+                audioSources[3].volume = MainMenu.volumeScale;
+            }
+            if (audioSources.Length >= 5)
+            {
+                audioSources[4].volume = MainMenu.volumeScale;
+            }
+
             hasRedScreenFinished = false;
             isCopAttackOver = false;
             hasAnimStarted = false;
@@ -80,12 +98,15 @@ public class PlayerStory3D : MonoBehaviour
                 print("this is working");
                 if (Input.GetKey(KeyCode.W) && transform.position.z <= 11.5)
                 {
+                    if (!audioSources[2].isPlaying) { audioSources[2].Play(); }
+                    //audioSources[0].Play();
                     print("move forward");
                     //transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.2f);
                     transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
                 }
                 if (Input.GetKey(KeyCode.S) && transform.position.z >= -8.568307)
                 {
+                    if (!audioSources[2].isPlaying) { audioSources[2].Play(); }
                     print("move back");
                     //transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 0.2f);
                     transform.Translate(new Vector3(0, 0, -speed * Time.deltaTime));
@@ -94,6 +115,7 @@ public class PlayerStory3D : MonoBehaviour
             if (shouldPlayerLookBack)
             {
                 GetComponent<Animator>().Play("3D Player");
+                //audioSources[4].Play();
             }
 
 
@@ -105,6 +127,7 @@ public class PlayerStory3D : MonoBehaviour
                     //print("Gravity is true");
                     print("before bat drop");
                     GameObject.Find("Baseball Bat").GetComponent<Rigidbody>().useGravity = true;
+                    audioSources[3].Play();
                     print("after bat drop");
                     canPlayerMove = true;
                     print(canPlayerMove);
@@ -129,7 +152,9 @@ public class PlayerStory3D : MonoBehaviour
                 {
                     cop.transform.position = new Vector3(0, -.8f, 13.5f);
                     cop.GetComponent<Animator>().Play("CopAttack");
+                    //audioSources[0].Play();
                     ObjectiveManager3D.SetObjectiveText("They know.");
+                    if (!isCopAttackOver && !audioSources[0].isPlaying) { audioSources[0].Play(); }
                 }
                 if (isCopAttackOver)
                 {
