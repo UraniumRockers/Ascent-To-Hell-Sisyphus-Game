@@ -25,10 +25,10 @@ public class PlayerGame2D : MonoBehaviour
     void Start()
     {
         audioSources = GetComponents<AudioSource>();
-        audioSources[0].volume = MainMenu.volumeScale; // Climbing Tune
-        audioSources[1].volume = MainMenu.volumeScale; // Death Sound
-        audioSources[2].volume = MainMenu.volumeScale; // Hit Sound
-        audioSources[3].volume = MainMenu.volumeScale; // Wind Ambiance
+        audioSources[0].volume = MainMenu.volumeScale * .5f; // Climbing Tune
+        audioSources[1].volume = MainMenu.volumeScale * .5f; // Death Sound
+        audioSources[2].volume = MainMenu.volumeScale;       // Hit Sound
+        audioSources[3].volume = MainMenu.volumeScale * .75f; // Wind Ambiance
 
         print("Start happens");
         rb = GetComponent<Rigidbody2D>();

@@ -20,6 +20,7 @@ public class PlayerLevel2D : MonoBehaviour
     private void Start()
     {
         hasPlayerInitiallyThought = false;
+        isPlayerPrepared = false ;
         sceneIndex = SceneManager.GetActiveScene().buildIndex; // Get scene index
 
         audioSources = gameObject.GetComponents<AudioSource>();

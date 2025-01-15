@@ -1,12 +1,14 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 //using UnityEditor.PackageManager;
 
 //using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerStory3D : MonoBehaviour
 {
@@ -28,6 +30,7 @@ public class PlayerStory3D : MonoBehaviour
     private bool isPlayerHoldingBat;
     private bool hasPlayerTurnedBack;
     private AudioSource[] audioSources;
+    //private GameObject endQuote;
 
     // Start is called before the first frame update
     void Start()
@@ -40,9 +43,9 @@ public class PlayerStory3D : MonoBehaviour
         if (gameObject.name == "Player")
         {
             audioSources = gameObject.GetComponents<AudioSource>();
-            audioSources[0].volume = MainMenu.volumeScale;
-            audioSources[1].volume = MainMenu.volumeScale;
-            audioSources[2].volume = MainMenu.volumeScale;
+            audioSources[0].volume = MainMenu.volumeScale * .5f;
+            audioSources[1].volume = MainMenu.volumeScale * .5f;
+            audioSources[2].volume = MainMenu.volumeScale * .75f;
 
             if (audioSources.Length >= 4)
             {
@@ -50,7 +53,9 @@ public class PlayerStory3D : MonoBehaviour
             }
             if (audioSources.Length >= 5)
             {
-                audioSources[4].volume = MainMenu.volumeScale;
+                audioSources[4].volume = MainMenu.volumeScale * .65f;
+                //endQuote = GameObject.Find("\"One must imagine Sisyphus happy.\"");
+                //endQuote.SetActive(false);
             }
 
             hasRedScreenFinished = false;
@@ -165,7 +170,10 @@ public class PlayerStory3D : MonoBehaviour
 
             if (isCopAttackOver)
             {
-                
+                //if (endQuote != null)
+                //{
+                //    //endQuote.GetComponent<TMP_Text>().color = new Color(endQuote.GetComponent<TMP_Text>().color.r, endQuote.GetComponent<TMP_Text>().color.g, endQuote.GetComponent<TMP_Text>().color.b, GameObject.Find("Red").GetComponent<Image>().color.a);
+                //}
                 health1.SetActive(false);
                 health0.SetActive(true);
                 //print(transform.rotation.x);
@@ -196,10 +204,10 @@ public class PlayerStory3D : MonoBehaviour
         hasRedScreenFinished = true;
         if (SceneManager.GetActiveScene().buildIndex == 9)
         {
-            #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-            #endif
-            Application.Quit();
+                #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+                #endif
+                Application.Quit();
         }
         else
         {
