@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
+//using Unity.VisualScripting;
 
 public class ThoughtCanvasManager2D : MonoBehaviour
 {

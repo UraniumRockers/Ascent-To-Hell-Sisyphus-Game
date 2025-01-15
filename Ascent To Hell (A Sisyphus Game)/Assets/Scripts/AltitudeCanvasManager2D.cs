@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
+//using Unity.VisualScripting;
 using System.Runtime.CompilerServices;
 
 public class AltitudeCanvasManager2D : MonoBehaviour
